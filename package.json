@@ -15,6 +15,8 @@
     "@types/react-dom": "^16.9.5",
     "classnames": "^2.2.6",
     "craco-less": "^1.16.0",
+    "formik": "^2.1.4",
+    "less": "^3.11.1",
     "lodash.throttle": "^4.1.1",
     "nav-frontend-core": "^4.0.12",
     "nav-frontend-js-utils": "^1.0.8",
