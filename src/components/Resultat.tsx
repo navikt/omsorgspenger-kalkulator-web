@@ -1,31 +1,62 @@
-import React, { FunctionComponent } from 'react';
-import Omsorgsdager from '../types/Omsorgsdager';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useFormikContext } from 'formik';
-import { grunnrettsdager } from './kalkulerOmsorgsdager';
+import { Element, Undertittel } from 'nav-frontend-typografi';
+import 'nav-frontend-tabell-style';
+import { omsorgsdager } from './kalkulerOmsorgsdager';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
+import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 
-interface ResultatProps {
-  grunnrettsdager?: Omsorgsdager;
-}
-
-const summerDager = (...omsorgsdager: Omsorgsdager[]): number => {
-  return omsorgsdager
+const summerDager = (omsorgsprinsipper: Omsorgsprinsipper): number => {
+  return Object.values(omsorgsprinsipper)
     .filter(dag => !!dag)
     .reduce((sum, omsorgsdag) => sum + omsorgsdag.normaldager + omsorgsdag.koronadager, 0);
 };
 
-const Resultat: FunctionComponent<ResultatProps> = () => {
+const Resultat: FunctionComponent = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
-
-  const antallGrunnrettsdager = grunnrettsdager(values.barn);
+  const totaltAntallDager = useMemo(() => omsorgsdager(values.barn), [values.barn]);
 
   return (
-    <div>
-      <span className="alignTextCenter">Søkeren har rett på:</span>
-      <span className="alignTextCenter">
-        {antallGrunnrettsdager ? ` ${summerDager(antallGrunnrettsdager)} dager` : ' -'}
-      </span>
-    </div>
+    <>
+      <div className="arrowUp" />
+      <div className="resultatHeader">
+        <Element>Søkeren har rett på</Element>
+        <Element className="dagerOmsorg">
+          {totaltAntallDager ? `${summerDager(totaltAntallDager)} dager med omsorgspenger` : '-'}
+        </Element>
+      </div>
+      <table className="tabell tabell--stripet">
+        <thead>
+          <tr>
+            <th />
+            <th>Dager</th>
+            <th>Korona-tillegg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Grunnrett</td>
+            <td>{totaltAntallDager?.grunnrett.normaldager || '-'}</td>
+            <td>{totaltAntallDager?.grunnrett.koronadager || '-'}</td>
+          </tr>
+          <tr>
+            <td>Barn med kronisk sykdom</td>
+            <td>{totaltAntallDager?.kroniskSykt.normaldager || '-'}</td>
+            <td>{totaltAntallDager?.kroniskSykt.koronadager || '-'}</td>
+          </tr>
+          <tr>
+            <td>Aleneansvar for barn med kronisk sykdom</td>
+            <td>{totaltAntallDager?.aleneomsorgKroniskSyke.normaldager || '-'}</td>
+            <td>{totaltAntallDager?.aleneomsorgKroniskSyke.koronadager || '-'}</td>
+          </tr>
+          <tr>
+            <td>Aleneomsorg</td>
+            <td>{totaltAntallDager?.aleneomsorg.normaldager || '-'}</td>
+            <td>{totaltAntallDager?.aleneomsorg.koronadager || '-'}</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
   );
 };
 

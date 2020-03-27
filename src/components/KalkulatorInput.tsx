@@ -1,7 +1,6 @@
 import React from 'react';
-import './kalkulatorInputStyle.css';
+import './kalkulatorInputStyle.less';
 import BarnInput from './BarnInput';
-import SøkerInput from './SøkerInput';
 import { Form, Formik } from 'formik';
 import Resultat from './Resultat';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
@@ -12,18 +11,14 @@ const initialValues: OmsorgsdagerForm = {
 };
 
 const KalkulatorInput = () => {
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
+  const noop = () => {};
   return (
     <div className="inputContainer">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} onSubmit={noop}>
         {() => (
           <Form>
-            <SøkerInput />
             <BarnInput />
             <Resultat />
-            <button type="submit">Verdier</button>
           </Form>
         )}
       </Formik>
