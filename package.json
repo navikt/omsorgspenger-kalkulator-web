@@ -33,6 +33,10 @@
     "react-scripts": "3.4.1",
     "typescript": "^3.8.3"
   },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "prettier": "^2.0.2"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
@@ -53,5 +57,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
