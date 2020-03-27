@@ -2,13 +2,13 @@ import Omsorgsdager from '../types/Omsorgsdager';
 import Barn from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 
-const GRUNNRETTSDAGER_1_2_BARN: number = 10;
-const GRUNNRETTSDAGER_3_ELLER_FLER_BARN: number = 15;
+export const GRUNNRETTSDAGER_1_2_BARN: number = 10;
+export const GRUNNRETTSDAGER_3_ELLER_FLER_BARN: number = 15;
 
-const KRONISK_SYKT_BARN_DAGER: number = 10;
-const ALENEOMSORG_KRONISK_SYKT_BARN_DAGER: number = KRONISK_SYKT_BARN_DAGER * 2;
+export const KRONISK_SYKT_BARN_DAGER: number = 10;
+export const ALENEOMSORG_KRONISK_SYKT_BARN_DAGER: number = KRONISK_SYKT_BARN_DAGER * 2;
 
-const ALENEOMSORGDAGER: number = 10; // Eller midlertidig aleneomsorg
+export const ALENEOMSORGDAGER: number = 10; // Eller midlertidig aleneomsorg
 
 export const grunnrettsdager = (barn: Barn[]): Omsorgsdager => {
   const antallTellendeBarn = barn.filter(b => b.alder === 'under12' || b.kroniskSykt).length;
