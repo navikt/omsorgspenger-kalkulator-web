@@ -47,11 +47,11 @@ jobs:
           docker push ${IMAGE}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy til testmiljø
-        uses: nais/deploy/actions/deploy@v1
-        env:
-          APIKEY: ${{ secrets.DEPLOY_KEY }}
-          CLUSTER: dev-fss
-          RESOURCE: deploy/dev-fss.yml
+#      - name: Deploy til testmiljø
+#        uses: nais/deploy/actions/deploy@v1
+#        env:
+#          APIKEY: ${{ secrets.DEPLOY_KEY }}
+#          CLUSTER: dev-fss
+#          RESOURCE: deploy/dev-fss.yml
 
 
