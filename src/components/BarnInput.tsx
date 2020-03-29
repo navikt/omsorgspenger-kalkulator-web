@@ -1,7 +1,7 @@
 import React from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
-import { RadioPanelGruppe, Checkbox, Radio } from 'nav-frontend-skjema';
+import { RadioPanelGruppe, Checkbox } from 'nav-frontend-skjema';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 

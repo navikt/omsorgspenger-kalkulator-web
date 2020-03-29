@@ -36,7 +36,7 @@ export const aleneomsorgKroniskSykeDager = (barn: Barn[]): Omsorgsdager => {
 };
 
 export const aleneomsorgsdager = (barn: Barn[]) => {
-  return barn.some(b => b.søkerHarAleneomsorgFor)
+  return barn.filter(b => b.alder === 'under12' || b.kroniskSykt).some(b => b.søkerHarAleneomsorgFor)
     ? { normaldager: ALENEOMSORGDAGER, koronadager: ALENEOMSORGDAGER }
     : { normaldager: 0, koronadager: 0 };
 };

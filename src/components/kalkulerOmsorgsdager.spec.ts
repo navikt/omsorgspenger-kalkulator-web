@@ -38,4 +38,37 @@ describe('omsorgsdager', () => {
     expect(aleneomsorg.normaldager).toEqual(ALENEOMSORGDAGER);
     expect(aleneomsorg.koronadager).toEqual(ALENEOMSORGDAGER);
   });
+
+  test('Man får ekstra dager hvis man har aleneomsorg for minst ett barn under 12, eller minst ett kronisk sykt barn', () => {
+    const ettBarnOver12: Barn[] = [
+      {
+        alder: 'over12',
+        søkerHarAleneomsorgFor: true,
+      },
+    ];
+    const aleneomsorg1 = omsorgsdager(ettBarnOver12)?.aleneomsorg;
+    expect(aleneomsorg1?.normaldager).toEqual(0);
+    expect(aleneomsorg1?.koronadager).toEqual(0);
+
+    const ettKroniskSyktBarnOver12: Barn[] = [
+      {
+        alder: 'over12',
+        kroniskSykt: true,
+        søkerHarAleneomsorgFor: true,
+      },
+    ];
+    const aleneomsorg2 = omsorgsdager(ettKroniskSyktBarnOver12)?.aleneomsorg;
+    expect(aleneomsorg2?.normaldager).toEqual(ALENEOMSORGDAGER);
+    expect(aleneomsorg2?.koronadager).toEqual(ALENEOMSORGDAGER);
+
+    const ettBarnUnder12: Barn[] = [
+      {
+        alder: 'under12',
+        søkerHarAleneomsorgFor: true,
+      },
+    ];
+    const aleneomsorg3 = omsorgsdager(ettBarnUnder12)?.aleneomsorg;
+    expect(aleneomsorg3?.normaldager).toEqual(ALENEOMSORGDAGER);
+    expect(aleneomsorg3?.koronadager).toEqual(ALENEOMSORGDAGER);
+  });
 });
