@@ -7,7 +7,7 @@ import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 
 const initialValues: OmsorgsdagerForm = {
   søker: {},
-  barn: [{}],
+  barn: [{ id: new Date().toString() }],
 };
 
 const KalkulatorInput = () => {

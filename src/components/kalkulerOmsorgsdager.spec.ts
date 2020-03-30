@@ -14,12 +14,15 @@ describe('omsorgsdager', () => {
         søkerHarAleneomsorgFor: true,
         kroniskSykt: true,
         alder: 'under12',
+        id: '1',
       },
       {
         alder: 'under12',
+        id: '2',
       },
       {
         alder: 'under12',
+        id: '3',
       },
     ];
 
@@ -44,6 +47,7 @@ describe('omsorgsdager', () => {
       {
         alder: 'over12',
         søkerHarAleneomsorgFor: true,
+        id: '1',
       },
     ];
     const aleneomsorg1 = omsorgsdager(ettBarnOver12)?.aleneomsorg;
@@ -55,6 +59,7 @@ describe('omsorgsdager', () => {
         alder: 'over12',
         kroniskSykt: true,
         søkerHarAleneomsorgFor: true,
+        id: '2',
       },
     ];
     const aleneomsorg2 = omsorgsdager(ettKroniskSyktBarnOver12)?.aleneomsorg;
@@ -65,6 +70,7 @@ describe('omsorgsdager', () => {
       {
         alder: 'under12',
         søkerHarAleneomsorgFor: true,
+        id: '3',
       },
     ];
     const aleneomsorg3 = omsorgsdager(ettBarnUnder12)?.aleneomsorg;
