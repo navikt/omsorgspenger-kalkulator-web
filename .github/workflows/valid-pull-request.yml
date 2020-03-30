@@ -22,6 +22,6 @@ jobs:
       - name: Installere dependencies
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
       - name: Tester og linting
-        run: yarn test --watchAll=false && yarn less:lint
+        run: yarn test --watchAll=false
 
 
