@@ -1,11 +1,13 @@
 import {
   ALENEOMSORG_KRONISK_SYKT_BARN_DAGER,
-  ALENEOMSORGDAGER,
+  ALENEOMSORGDAGER_1_2_BARN,
+  ALENEOMSORGDAGER_3_ELLER_FLERE_BARN,
   GRUNNRETTSDAGER_3_ELLER_FLER_BARN,
   omsorgsdager,
 } from './kalkulerOmsorgsdager';
 import Barn from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
+import Omsorgsdager from '../types/Omsorgsdager';
 
 describe('omsorgsdager', () => {
   test('3 barn derav ett man har aleneomsorg for og er kronisk sykt', () => {
@@ -38,8 +40,8 @@ describe('omsorgsdager', () => {
     expect(kroniskSykt.normaldager).toEqual(0);
     expect(kroniskSykt.koronadager).toEqual(0);
 
-    expect(aleneomsorg.normaldager).toEqual(ALENEOMSORGDAGER);
-    expect(aleneomsorg.koronadager).toEqual(ALENEOMSORGDAGER);
+    expect(aleneomsorg.normaldager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
+    expect(aleneomsorg.koronadager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
   });
 
   test('Man får ekstra dager hvis man har aleneomsorg for minst ett barn under 12, eller minst ett kronisk sykt barn', () => {
@@ -63,8 +65,8 @@ describe('omsorgsdager', () => {
       },
     ];
     const aleneomsorg2 = omsorgsdager(ettKroniskSyktBarnOver12)?.aleneomsorg;
-    expect(aleneomsorg2?.normaldager).toEqual(ALENEOMSORGDAGER);
-    expect(aleneomsorg2?.koronadager).toEqual(ALENEOMSORGDAGER);
+    expect(aleneomsorg2?.normaldager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
+    expect(aleneomsorg2?.koronadager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
 
     const ettBarnUnder12: Barn[] = [
       {
@@ -74,7 +76,33 @@ describe('omsorgsdager', () => {
       },
     ];
     const aleneomsorg3 = omsorgsdager(ettBarnUnder12)?.aleneomsorg;
-    expect(aleneomsorg3?.normaldager).toEqual(ALENEOMSORGDAGER);
-    expect(aleneomsorg3?.koronadager).toEqual(ALENEOMSORGDAGER);
+    expect(aleneomsorg3?.normaldager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
+    expect(aleneomsorg3?.koronadager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
+  });
+
+  test('Man får ekstra aleneomsorgsdager hvis man har 3 barn eller mer', () => {
+    const barn: Barn[] = [
+      {
+        søkerHarAleneomsorgFor: true,
+        alder: 'under12',
+        id: '1',
+      },
+      {
+        søkerHarAleneomsorgFor: true,
+        alder: 'under12',
+        id: '2',
+      },
+      {
+        søkerHarAleneomsorgFor: true,
+        alder: 'under12',
+        id: '3',
+      },
+    ];
+
+    // @ts-ignore
+    const { aleneomsorg }: Omsorgsprinsipper = omsorgsdager(barn);
+
+    expect(aleneomsorg?.normaldager).toEqual(ALENEOMSORGDAGER_3_ELLER_FLERE_BARN);
+    expect(aleneomsorg?.koronadager).toEqual(ALENEOMSORGDAGER_3_ELLER_FLERE_BARN);
   });
 });

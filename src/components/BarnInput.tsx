@@ -40,7 +40,6 @@ const BarnInput = () => {
                   {({ field }: FieldProps) => (
                     <>
                       <RadioPanelGruppe
-                        className="lolo"
                         name="barnetsAlder"
                         legend="Hvor gammelt er barnet?"
                         radios={radios(index)}

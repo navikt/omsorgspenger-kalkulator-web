@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import { useFormikContext } from 'formik';
-import { Element, Undertittel } from 'nav-frontend-typografi';
+import { Element } from 'nav-frontend-typografi';
 import 'nav-frontend-tabell-style';
 import { omsorgsdager } from './kalkulerOmsorgsdager';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';

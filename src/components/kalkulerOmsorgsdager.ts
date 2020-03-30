@@ -8,10 +8,13 @@ export const GRUNNRETTSDAGER_3_ELLER_FLER_BARN: number = 15;
 export const KRONISK_SYKT_BARN_DAGER: number = 10;
 export const ALENEOMSORG_KRONISK_SYKT_BARN_DAGER: number = KRONISK_SYKT_BARN_DAGER * 2;
 
-export const ALENEOMSORGDAGER: number = 10; // Eller midlertidig aleneomsorg
+export const ALENEOMSORGDAGER_1_2_BARN: number = 10; // Eller midlertidig aleneomsorg
+export const ALENEOMSORGDAGER_3_ELLER_FLERE_BARN: number = 15; // Eller midlertidig aleneomsorg
+
+const harOmsorg = (barn: Barn): boolean => !!(barn.alder === 'under12' || barn.kroniskSykt);
 
 export const grunnrettsdager = (barn: Barn[]): Omsorgsdager => {
-  const antallTellendeBarn = barn.filter(b => b.alder === 'under12' || b.kroniskSykt).length;
+  const antallTellendeBarn = barn.filter(harOmsorg).length;
   if (antallTellendeBarn === 0) {
     return { normaldager: 0, koronadager: 0 };
   }
@@ -36,9 +39,15 @@ export const aleneomsorgKroniskSykeDager = (barn: Barn[]): Omsorgsdager => {
 };
 
 export const aleneomsorgsdager = (barn: Barn[]) => {
-  return barn.filter(b => b.alder === 'under12' || b.kroniskSykt).some(b => b.søkerHarAleneomsorgFor)
-    ? { normaldager: ALENEOMSORGDAGER, koronadager: ALENEOMSORGDAGER }
-    : { normaldager: 0, koronadager: 0 };
+  const antallTellendeBarn = barn.filter(harOmsorg).filter(b => b.søkerHarAleneomsorgFor).length;
+
+  if (antallTellendeBarn === 0) {
+    return { normaldager: 0, koronadager: 0 };
+  }
+  if (antallTellendeBarn < 3) {
+    return { normaldager: ALENEOMSORGDAGER_1_2_BARN, koronadager: ALENEOMSORGDAGER_1_2_BARN };
+  }
+  return { normaldager: ALENEOMSORGDAGER_3_ELLER_FLERE_BARN, koronadager: ALENEOMSORGDAGER_3_ELLER_FLERE_BARN };
 };
 
 export const omsorgsdager = (barn: Barn[]): Omsorgsprinsipper | null => {
