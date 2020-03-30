@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.5",
     "classnames": "^2.2.6",
     "craco-less": "^1.16.0",
+    "express": "^4.17.1",
     "formik": "^2.1.4",
     "less": "^3.11.1",
     "lodash.throttle": "^4.1.1",
@@ -44,7 +45,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-express": "node ./server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
