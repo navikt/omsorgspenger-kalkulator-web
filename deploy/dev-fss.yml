@@ -7,7 +7,7 @@ metadata:
     team: k9saksbehandling
 spec:
   image: {{ image }}
-  port: 9000
+  port: 8080
   team: k9saksbehandling
   liveness:
     path: /isAlive
