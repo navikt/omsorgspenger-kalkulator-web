@@ -85,14 +85,8 @@ const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsor
   };
 };
 
-export const omsorgsdager = ({ barn, foreldre }: OmsorgsdagerForm): Omsorgsprinsipper | null => {
-  if (!barn || !barn.length) {
-    return null;
-  }
+export const omsorgsdager = ({ barn = [], foreldre }: OmsorgsdagerForm): Omsorgsprinsipper | null => {
   const barnMinimumUtfylt: Barn[] = barn.filter(b => b.alder);
-  if (!barnMinimumUtfylt.length) {
-    return null;
-  }
 
   const grunnrett = grunnrettsdager(barnMinimumUtfylt);
 

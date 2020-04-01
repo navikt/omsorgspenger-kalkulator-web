@@ -228,4 +228,28 @@ describe('omsorgsdager', () => {
     expect(overføringsdager?.normaldager).toEqual(0);
     expect(overføringsdager?.koronadager).toEqual(5);
   });
+
+  test('Overføringsdager beregnes selv om ingen barn er gyldig utfylt', () => {
+    const ingenBarnUtfylt: OmsorgsdagerForm = {
+      barn: [{ id: '1' }],
+      foreldre: [
+        {
+          id: '1',
+          normaldager: {
+            dagerTildelt: 0,
+            dagerFått: 5,
+          },
+          koronadager: {
+            dagerTildelt: 0,
+            dagerFått: 10,
+          },
+        },
+      ],
+    };
+
+    const overføringsdager = omsorgsdager(ingenBarnUtfylt)?.overføringsdager;
+
+    expect(overføringsdager?.normaldager).toEqual(5);
+    expect(overføringsdager?.koronadager).toEqual(10);
+  });
 });
