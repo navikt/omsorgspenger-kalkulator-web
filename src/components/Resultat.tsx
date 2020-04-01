@@ -45,14 +45,19 @@ const Resultat: FunctionComponent = () => {
             <td>{totaltAntallDager?.kroniskSykt.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Aleneansvar for barn med kronisk sykdom</td>
+            <td>Aleneomsorg for barn med kronisk sykdom</td>
             <td>{totaltAntallDager?.aleneomsorgKroniskSyke.normaldager || '-'}</td>
             <td>{totaltAntallDager?.aleneomsorgKroniskSyke.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Aleneomsorg</td>
+            <td>Alene om omsorgen</td>
             <td>{totaltAntallDager?.aleneomsorg.normaldager || '-'}</td>
             <td>{totaltAntallDager?.aleneomsorg.koronadager || '-'}</td>
+          </tr>
+          <tr>
+            <td>Overført/Mottatt</td>
+            <td>{totaltAntallDager?.overføringsdager.normaldager || '-'}</td>
+            <td>{totaltAntallDager?.overføringsdager.koronadager || '-'}</td>
           </tr>
         </tbody>
       </table>
