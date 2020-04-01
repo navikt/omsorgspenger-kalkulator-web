@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { RadioPanelGruppe, Checkbox } from 'nav-frontend-skjema';
@@ -8,17 +8,19 @@ import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { ReactComponent as TrashCan } from '../images/trash-can.svg';
 import { uuidv4 } from '../utils';
 
-const radios = (index: number) => [
-  { label: 'Under 12', value: 'under12', id: `barn[${index}].under12` },
-  { label: 'Over 12', value: 'over12', id: `barn[${index}].over12` },
-];
-
 const BarnInput = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
+  const radios = useCallback(
+    (index: number) => [
+      { label: 'Under 12', value: 'under12', id: `barn[${index}].under12` },
+      { label: 'Over 12', value: 'over12', id: `barn[${index}].over12` },
+    ],
+    [],
+  );
 
   return (
     <div className="søkerensBarn">
-      <Undertittel>Om søkerens barn</Undertittel>
+      <Undertittel>Barn som bor hos søker</Undertittel>
       <FieldArray
         name="barn"
         render={arrayHelpers => (

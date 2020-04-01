@@ -37,27 +37,27 @@ const Resultat: FunctionComponent = () => {
           <tr>
             <td>Grunnrett</td>
             <td>{totaltAntallDager?.grunnrett.normaldager || '-'}</td>
-            <td>{totaltAntallDager?.grunnrett.koronadager || '-'}</td>
+            <td className="koronabakgrunn">{totaltAntallDager?.grunnrett.koronadager || '-'}</td>
           </tr>
           <tr>
             <td>Barn med kronisk sykdom</td>
             <td>{totaltAntallDager?.kroniskSykt.normaldager || '-'}</td>
-            <td>{totaltAntallDager?.kroniskSykt.koronadager || '-'}</td>
+            <td className="koronabakgrunn">{totaltAntallDager?.kroniskSykt.koronadager || '-'}</td>
           </tr>
           <tr>
             <td>Aleneomsorg for barn med kronisk sykdom</td>
             <td>{totaltAntallDager?.aleneomsorgKroniskSyke.normaldager || '-'}</td>
-            <td>{totaltAntallDager?.aleneomsorgKroniskSyke.koronadager || '-'}</td>
+            <td className="koronabakgrunn">{totaltAntallDager?.aleneomsorgKroniskSyke.koronadager || '-'}</td>
           </tr>
           <tr>
             <td>Alene om omsorgen</td>
             <td>{totaltAntallDager?.aleneomsorg.normaldager || '-'}</td>
-            <td>{totaltAntallDager?.aleneomsorg.koronadager || '-'}</td>
+            <td className="koronabakgrunn">{totaltAntallDager?.aleneomsorg.koronadager || '-'}</td>
           </tr>
           <tr>
             <td>Overført/Mottatt</td>
             <td>{totaltAntallDager?.overføringsdager.normaldager || '-'}</td>
-            <td>{totaltAntallDager?.overføringsdager.koronadager || '-'}</td>
+            <td className="koronabakgrunn">{totaltAntallDager?.overføringsdager.koronadager || '-'}</td>
           </tr>
         </tbody>
       </table>

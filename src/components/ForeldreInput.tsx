@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent } from 'react';
+import React, { BaseSyntheticEvent, useCallback } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
@@ -10,10 +10,15 @@ import { initForelderValue } from './KalkulatorInput';
 const ForeldreInput = () => {
   const foreldre = useFormikContext<OmsorgsdagerForm>().values.foreldre;
   const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
-  const inputFelt = (name: string) => (
-    <Field name={name}>
-      {({ field }: FieldProps) => <Input {...field} mini onFocus={markerTekstVedFokus} type="number" />}
-    </Field>
+  const inputFelt = useCallback(
+    (name: string) => (
+      <Field name={name}>
+        {({ field }: FieldProps) => (
+          <Input {...field} mini onFocus={markerTekstVedFokus} type="number" className="dagerInput" />
+        )}
+      </Field>
+    ),
+    [],
   );
 
   return (
@@ -23,24 +28,31 @@ const ForeldreInput = () => {
         name="foreldre"
         render={arrayHelpers => (
           <>
-            <table className="tabell tabell--stripet">
+            <table className="tabell tabell--reverse-stripet borderless">
               <thead>
                 <tr>
                   <th />
-                  <th>Dager mottatt (normal forskrift)</th>
-                  <th>Dager fordelt (normal forskrift)</th>
-                  <th>Dager mottatt (midlertidig forskrift)</th>
-                  <th>Dager fordelt (midlertidig forskrift)</th>
+                  <th>Normal forskrift</th>
+                  <th />
+                  <th>Midlertidig forskrift</th>
+                  <th />
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td />
+                  <td>Dager mottatt</td>
+                  <td>Dager fordelt</td>
+                  <td>Dager mottatt</td>
+                  <td>Dager overført</td>
+                </tr>
                 {foreldre.map((forelder, index) => (
                   <tr key={forelder.id}>
                     <td>{`Forelder #${index + 1}`}</td>
                     <td>{inputFelt(`foreldre[${index}].normaldager.dagerFått`)}</td>
                     <td>{inputFelt(`foreldre[${index}].normaldager.dagerTildelt`)}</td>
-                    <td>{inputFelt(`foreldre[${index}].koronadager.dagerFått`)}</td>
-                    <td>{inputFelt(`foreldre[${index}].koronadager.dagerTildelt`)}</td>
+                    <td className="koronabakgrunn">{inputFelt(`foreldre[${index}].koronadager.dagerFått`)}</td>
+                    <td className="koronabakgrunn">{inputFelt(`foreldre[${index}].koronadager.dagerTildelt`)}</td>
                   </tr>
                 ))}
               </tbody>
