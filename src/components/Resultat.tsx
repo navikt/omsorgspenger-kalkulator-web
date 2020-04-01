@@ -14,7 +14,7 @@ const summerDager = (omsorgsprinsipper: Omsorgsprinsipper): number => {
 
 const Resultat: FunctionComponent = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
-  const totaltAntallDager = useMemo(() => omsorgsdager(values.barn), [values.barn]);
+  const totaltAntallDager = useMemo(() => omsorgsdager(values), [values]);
 
   return (
     <>
