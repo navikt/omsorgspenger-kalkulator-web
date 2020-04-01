@@ -1,4 +1,4 @@
-import stringEnum from '../utils';
+import { stringEnum } from '../utils';
 
 export const ArbeidsstatusEnum = stringEnum({
   ARBEIDSTAKER: 'ARBEIDSTAKER',

@@ -6,6 +6,7 @@ import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { ReactComponent as TrashCan } from '../images/trash-can.svg';
+import { uuidv4 } from '../utils';
 
 const radios = (index: number) => [
   { label: 'Under 12', value: 'under12', id: `barn[${index}].under12` },
@@ -58,10 +59,10 @@ const BarnInput = () => {
                 {index < values.barn.length - 1 && <div className="verticalLine" />}
               </div>
             ))}
-            <div className="justifyFlexEnd">
+            <div className="flexJustifyCenter">
               <Flatknapp
                 htmlType="button"
-                onClick={() => arrayHelpers.push({ id: new Date().toString() })}
+                onClick={() => arrayHelpers.push({ id: uuidv4() })}
                 mini
                 form="kompakt"
                 className="marginTop"

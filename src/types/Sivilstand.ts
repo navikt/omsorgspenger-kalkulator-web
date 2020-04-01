@@ -1,4 +1,4 @@
-import stringEnum from '../utils';
+import { stringEnum } from '../utils';
 
 export const SivilstandEnum = stringEnum({
   GIFT: 'GIFT',
