@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useCallback } from 'react';
+import React, { BaseSyntheticEvent, FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
@@ -7,20 +7,22 @@ import { Flatknapp } from 'nav-frontend-knapper';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { initForelderValue } from './KalkulatorInput';
 import tekster from '../tekster';
+import { kunPositiveHeltall } from './validators';
+
+const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => {
+  const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
+  return (
+    <Field name={name}>
+      {({ field }: FieldProps) => {
+        const feil = kunPositiveHeltall(field.value);
+        return <Input {...field} mini onFocus={markerTekstVedFokus} type="number" className="dagerInput" feil={feil} />;
+      }}
+    </Field>
+  );
+};
 
 const ForeldreInput = () => {
   const foreldre = useFormikContext<OmsorgsdagerForm>().values.foreldre;
-  const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
-  const inputFelt = useCallback(
-    (name: string) => (
-      <Field name={name}>
-        {({ field }: FieldProps) => (
-          <Input {...field} mini onFocus={markerTekstVedFokus} type="number" className="dagerInput" />
-        )}
-      </Field>
-    ),
-    [],
-  );
 
   return (
     <div className="foreldreInput">
@@ -29,13 +31,13 @@ const ForeldreInput = () => {
         name="foreldre"
         render={arrayHelpers => (
           <>
-            <table className="tabell tabell--reverse-stripet borderless">
+            <table className="tabell tabell--reverse-stripet borderless foreldertabell">
               <thead>
                 <tr>
                   <th />
-                  <th>{tekster('ForeldreInput.NormalForskrift')}</th>
+                  <th className="noTextWrap">{tekster('ForeldreInput.NormalForskrift')}</th>
                   <th />
-                  <th>{tekster('ForeldreInput.MidlertidigForskrift')}</th>
+                  <th className="noTextWrap">{tekster('ForeldreInput.MidlertidigForskrift')}</th>
                   <th />
                 </tr>
               </thead>
@@ -49,11 +51,19 @@ const ForeldreInput = () => {
                 </tr>
                 {foreldre.map((forelder, index) => (
                   <tr key={forelder.id}>
-                    <td>{`${tekster('ForeldreInput.Forelder')} #${index + 1}`}</td>
-                    <td>{inputFelt(`foreldre[${index}].normaldager.dagerFått`)}</td>
-                    <td>{inputFelt(`foreldre[${index}].normaldager.dagerTildelt`)}</td>
-                    <td className="koronabakgrunn">{inputFelt(`foreldre[${index}].koronadager.dagerFått`)}</td>
-                    <td className="koronabakgrunn">{inputFelt(`foreldre[${index}].koronadager.dagerTildelt`)}</td>
+                    <td valign="top">{`${tekster('ForeldreInput.Forelder')} #${index + 1}`}</td>
+                    <td valign="top">
+                      <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerFått`} />
+                    </td>
+                    <td valign="top">
+                      <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerTildelt`} />
+                    </td>
+                    <td valign="top" className="koronabakgrunn">
+                      <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerFått`} />
+                    </td>
+                    <td valign="top" className="koronabakgrunn">
+                      <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerTildelt`} />
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -3,6 +3,7 @@ import Barn from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Forelder from '../types/Forelder';
+import { kunPositiveHeltall } from './validators';
 
 export const GRUNNRETTSDAGER_1_2_BARN: number = 10;
 export const GRUNNRETTSDAGER_3_ELLER_FLER_BARN: number = 15;
@@ -52,8 +53,16 @@ export const aleneomsorgsdager = (barn: Barn[]): Omsorgsdager => {
   return { normaldager: ALENEOMSORGDAGER_3_ELLER_FLERE_BARN, koronadager: ALENEOMSORGDAGER_3_ELLER_FLERE_BARN };
 };
 
+const bareGyldigeDager = (forelder: Forelder): boolean =>
+  [
+    forelder.normaldager?.dagerTildelt,
+    forelder.normaldager?.dagerFått,
+    forelder.koronadager?.dagerFått,
+    forelder.koronadager?.dagerTildelt,
+  ].reduce((validerer: boolean, dager) => validerer && !kunPositiveHeltall(dager || 0), true);
+
 const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsorgsdager => {
-  const { koronadager, mottatteNormaldager, fordelteNormaldager } = foreldre.reduce(
+  const { koronadager, mottatteNormaldager, fordelteNormaldager } = foreldre.filter(bareGyldigeDager).reduce(
     (tmpDager, forelder) => ({
       koronadager:
         tmpDager.koronadager + (forelder.koronadager?.dagerFått || 0) - (forelder.koronadager?.dagerTildelt || 0),

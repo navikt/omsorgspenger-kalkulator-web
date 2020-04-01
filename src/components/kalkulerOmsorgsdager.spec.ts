@@ -205,4 +205,27 @@ describe('omsorgsdager', () => {
     expect(overføringsdager?.normaldager).toEqual(-8);
     expect(overføringsdager?.koronadager).toEqual(-2);
   });
+
+  test('Ignorerer forelder som ikke bare har positive heltall som input', () => {
+    const inputverdier: OmsorgsdagerForm = {
+      barn: [{ id: '1', alder: 'under12' }],
+      foreldre: [
+        {
+          id: '1',
+          normaldager: { dagerFått: -1, dagerTildelt: 3 },
+          koronadager: { dagerFått: 10, dagerTildelt: 0 },
+        },
+        {
+          id: '2',
+          normaldager: { dagerFått: 0, dagerTildelt: 0 },
+          koronadager: { dagerFått: 5, dagerTildelt: 0 },
+        },
+      ],
+    };
+
+    const overføringsdager = omsorgsdager(inputverdier)?.overføringsdager;
+
+    expect(overføringsdager?.normaldager).toEqual(0);
+    expect(overføringsdager?.koronadager).toEqual(5);
+  });
 });
