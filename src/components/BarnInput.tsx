@@ -7,6 +7,7 @@ import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { ReactComponent as TrashCan } from '../images/trash-can.svg';
 import { uuidv4 } from '../utils';
+import tekster from '../tekster';
 
 const BarnInput = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
@@ -20,7 +21,7 @@ const BarnInput = () => {
 
   return (
     <div className="søkerensBarn">
-      <Undertittel>Barn som bor hos søker</Undertittel>
+      <Undertittel>{tekster('BarnInput.Overskrift')}</Undertittel>
       <FieldArray
         name="barn"
         render={arrayHelpers => (
@@ -36,7 +37,7 @@ const BarnInput = () => {
                     className="høyreHjørne"
                   >
                     <TrashCan className="buttonIcon" />
-                    <span>Fjern</span>
+                    <span>{tekster('BarnInput.Fjern')}</span>
                   </Flatknapp>
                 )}
                 <Field name={`barn[${index}].alder`}>
@@ -44,7 +45,7 @@ const BarnInput = () => {
                     <>
                       <RadioPanelGruppe
                         name="barnetsAlder"
-                        legend="Hvor gammelt er barnet?"
+                        legend={tekster('BarnInput.Alder')}
                         radios={radios(index)}
                         checked={field.value}
                         {...field}
@@ -53,10 +54,10 @@ const BarnInput = () => {
                   )}
                 </Field>
                 <Field name={`barn[${index}].kroniskSykt`}>
-                  {({ field }: FieldProps) => <Checkbox label="Barnet er kronisk sykt" {...field} />}
+                  {({ field }: FieldProps) => <Checkbox label={tekster('BarnInput.KroniskSykt')} {...field} />}
                 </Field>
                 <Field name={`barn[${index}].søkerHarAleneomsorgFor`}>
-                  {({ field }: FieldProps) => <Checkbox label="Søker har aleneomsorg for barnet" {...field} />}
+                  {({ field }: FieldProps) => <Checkbox label={tekster('BarnInput.Aleneomsorg')} {...field} />}
                 </Field>
                 {index < values.barn.length - 1 && <div className="verticalLine" />}
               </div>
@@ -70,7 +71,7 @@ const BarnInput = () => {
                 className="marginTop"
               >
                 <AddCircle className="buttonIcon" />
-                <span>Legg til flere barn</span>
+                <span>{tekster('BarnInput.LeggTilBarn')}</span>
               </Flatknapp>
             </div>
           </div>

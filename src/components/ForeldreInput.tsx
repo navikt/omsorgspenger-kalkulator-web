@@ -6,6 +6,7 @@ import { Input } from 'nav-frontend-skjema';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { initForelderValue } from './KalkulatorInput';
+import tekster from '../tekster';
 
 const ForeldreInput = () => {
   const foreldre = useFormikContext<OmsorgsdagerForm>().values.foreldre;
@@ -23,7 +24,7 @@ const ForeldreInput = () => {
 
   return (
     <div className="foreldreInput">
-      <Undertittel>Foreldre - overførte dager</Undertittel>
+      <Undertittel>{tekster('ForeldreInput.Overskrift')}</Undertittel>
       <FieldArray
         name="foreldre"
         render={arrayHelpers => (
@@ -32,23 +33,23 @@ const ForeldreInput = () => {
               <thead>
                 <tr>
                   <th />
-                  <th>Normal forskrift</th>
+                  <th>{tekster('ForeldreInput.NormalForskrift')}</th>
                   <th />
-                  <th>Midlertidig forskrift</th>
+                  <th>{tekster('ForeldreInput.MidlertidigForskrift')}</th>
                   <th />
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td />
-                  <td>Dager mottatt</td>
-                  <td>Dager fordelt</td>
-                  <td>Dager mottatt</td>
-                  <td>Dager overført</td>
+                  <td>{tekster('ForeldreInput.DagerMottatt')}</td>
+                  <td>{tekster('ForeldreInput.DagerFordelt')}</td>
+                  <td>{tekster('ForeldreInput.DagerMottatt')}</td>
+                  <td>{tekster('ForeldreInput.DagerOverført')}</td>
                 </tr>
                 {foreldre.map((forelder, index) => (
                   <tr key={forelder.id}>
-                    <td>{`Forelder #${index + 1}`}</td>
+                    <td>{`${tekster('ForeldreInput.Forelder')} #${index + 1}`}</td>
                     <td>{inputFelt(`foreldre[${index}].normaldager.dagerFått`)}</td>
                     <td>{inputFelt(`foreldre[${index}].normaldager.dagerTildelt`)}</td>
                     <td className="koronabakgrunn">{inputFelt(`foreldre[${index}].koronadager.dagerFått`)}</td>
@@ -60,7 +61,7 @@ const ForeldreInput = () => {
             <div className="flexJustifyCenter">
               <Flatknapp htmlType="button" onClick={() => arrayHelpers.push(initForelderValue())} mini form="kompakt">
                 <AddCircle className="buttonIcon" />
-                <span>Legg til flere foreldre</span>
+                <span>{tekster('ForeldreInput.LeggTilForelder')}</span>
               </Flatknapp>
             </div>
           </>

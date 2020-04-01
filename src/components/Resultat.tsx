@@ -5,6 +5,7 @@ import 'nav-frontend-tabell-style';
 import { omsorgsdager } from './kalkulerOmsorgsdager';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
+import tekster from '../tekster';
 
 const summerDager = (omsorgsprinsipper: Omsorgsprinsipper): number => {
   return Object.values(omsorgsprinsipper)
@@ -20,42 +21,42 @@ const Resultat: FunctionComponent = () => {
     <>
       <div className="arrowUp" />
       <div className="resultatHeader">
-        <Element>Søkeren har rett på</Element>
+        <Element>{tekster('SøkerInput.HarRettPå')}</Element>
         <Element className="dagerOmsorg">
-          {totaltAntallDager ? `${summerDager(totaltAntallDager)} dager med omsorgspenger` : '-'}
+          {totaltAntallDager ? `${summerDager(totaltAntallDager)} ${tekster('SøkerInput.DagerOmsorgspenger')}` : '-'}
         </Element>
       </div>
       <table className="tabell tabell--stripet">
         <thead>
           <tr>
             <th />
-            <th>Dager</th>
-            <th>Korona-tillegg</th>
+            <th>{tekster('SøkerInput.Dager')}</th>
+            <th>{tekster('SøkerInput.KoronaTillegg')}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Grunnrett</td>
+            <td>{tekster('SøkerInput.Grunnrett')}</td>
             <td>{totaltAntallDager?.grunnrett.normaldager || '-'}</td>
             <td className="koronabakgrunn">{totaltAntallDager?.grunnrett.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Barn med kronisk sykdom</td>
+            <td>{tekster('SøkerInput.KroniskSykdom')}</td>
             <td>{totaltAntallDager?.kroniskSykt.normaldager || '-'}</td>
             <td className="koronabakgrunn">{totaltAntallDager?.kroniskSykt.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Aleneomsorg for barn med kronisk sykdom</td>
+            <td>{tekster('SøkerInput.AleneKroniskSykdom')}</td>
             <td>{totaltAntallDager?.aleneomsorgKroniskSyke.normaldager || '-'}</td>
             <td className="koronabakgrunn">{totaltAntallDager?.aleneomsorgKroniskSyke.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Alene om omsorgen</td>
+            <td>{tekster('SøkerInput.AleneOmOmsorg')}</td>
             <td>{totaltAntallDager?.aleneomsorg.normaldager || '-'}</td>
             <td className="koronabakgrunn">{totaltAntallDager?.aleneomsorg.koronadager || '-'}</td>
           </tr>
           <tr>
-            <td>Overført/Mottatt</td>
+            <td>{tekster('SøkerInput.OverførtMottatt')}</td>
             <td>{totaltAntallDager?.overføringsdager.normaldager || '-'}</td>
             <td className="koronabakgrunn">{totaltAntallDager?.overføringsdager.koronadager || '-'}</td>
           </tr>

@@ -4,6 +4,7 @@ import { Systemtittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
+import tekster from '../tekster';
 
 const KalkulatorHeader = () => {
   const { resetForm } = useFormikContext<OmsorgsdagerForm>();
@@ -11,10 +12,10 @@ const KalkulatorHeader = () => {
     <div className="kalkulatorHeader">
       <span className="kalkulatorTitle">
         <KalkulatorIkon />
-        <Systemtittel tag="h1">Omsorgspengerkalkulator</Systemtittel>
+        <Systemtittel tag="h1">{tekster('KalkulatorHeader.Overskrift')}</Systemtittel>
       </span>
       <Flatknapp mini kompakt onClick={() => resetForm()}>
-        Nullstill
+        {tekster('KalkulatorHeader.Nullstill')}
       </Flatknapp>
     </div>
   );
