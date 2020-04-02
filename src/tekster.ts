@@ -3,7 +3,7 @@ interface StringMap {
 }
 
 const tekstMap: StringMap = {
-  'KalkulatorHeader.Overskrift': 'Omsorgspengerkalkulator',
+  'KalkulatorHeader.Overskrift': 'Omsorgsdagerkalkulator',
   'KalkulatorHeader.Nullstill': 'Nullstill',
   'BarnInput.Overskrift': 'Barn som bor hos søker',
   'BarnInput.Fjern': 'Fjern',

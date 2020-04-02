@@ -34,8 +34,8 @@ const KalkulatorInput = () => (
       {() => (
         <Form>
           <KalkulatorHeader />
-          <ForeldreInput />
           <BarnInput />
+          <ForeldreInput />
           <Resultat />
         </Form>
       )}
