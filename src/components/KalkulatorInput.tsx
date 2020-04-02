@@ -1,12 +1,13 @@
 import React from 'react';
 import './kalkulatorInputStyle.less';
 import BarnInput from './BarnInput';
-import { Form, Formik } from 'formik';
+import { Form } from 'formik';
 import Resultat from './Resultat';
 import KalkulatorHeader from './KalkulatorHeader';
 import ForeldreInput from './ForeldreInput';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { uuidv4 } from '../utils';
+import SkjemaContext from './SkjemaContext';
 
 export const initForelderValue = () => ({
   id: uuidv4(),
@@ -26,11 +27,9 @@ const initialValues: OmsorgsdagerForm = {
   foreldre: [initForelderValue()],
 };
 
-const noop = () => {};
-
 const KalkulatorInput = () => (
   <div className="inputContainer">
-    <Formik initialValues={initialValues} onSubmit={noop}>
+    <SkjemaContext initialValues={initialValues}>
       {() => (
         <Form>
           <KalkulatorHeader />
@@ -39,7 +38,7 @@ const KalkulatorInput = () => (
           <Resultat />
         </Form>
       )}
-    </Formik>
+    </SkjemaContext>
   </div>
 );
 
