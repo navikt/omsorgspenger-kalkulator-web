@@ -59,7 +59,7 @@ const bareGyldigeDager = (forelder: Forelder): boolean =>
     forelder.normaldager?.dagerFått,
     forelder.koronadager?.dagerFått,
     forelder.koronadager?.dagerTildelt,
-  ].reduce((validerer: boolean, dager) => validerer && !kunPositiveHeltall(dager || 0), true);
+  ].every(dager => !kunPositiveHeltall(dager || 0));
 
 const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsorgsdager => {
   const { koronadager, mottatteNormaldager, fordelteNormaldager } = foreldre.filter(bareGyldigeDager).reduce(

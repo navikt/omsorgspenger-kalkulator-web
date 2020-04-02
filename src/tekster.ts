@@ -12,7 +12,7 @@ const tekstMap: StringMap = {
   'BarnInput.Aleneomsorg': 'Søker har aleneomsorg for barnet',
   'BarnInput.LeggTilBarn': 'Legg til flere barn',
   'ForeldreInput.Overskrift': 'Foreldre - overførte og fordelte dager',
-  'ForeldreInput.NormalForskrift': 'Normal forskrift',
+  'ForeldreInput.NormalForskrift': 'Opprinnelige regler',
   'ForeldreInput.MidlertidigForskrift': 'Midlertidig forskrift',
   'ForeldreInput.DagerMottatt': 'Dager mottatt',
   'ForeldreInput.DagerFordelt': 'Dager fordelt',
