@@ -7,7 +7,7 @@ import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import tekster from '../tekster';
 
-const summerDager = (omsorgsprinsipper: Omsorgsprinsipper): number => {
+export const summerDager = (omsorgsprinsipper: Omsorgsprinsipper): number => {
   return Object.values(omsorgsprinsipper)
     .filter(dag => !!dag)
     .reduce((sum, omsorgsdag) => sum + omsorgsdag.normaldager + omsorgsdag.koronadager, 0);
