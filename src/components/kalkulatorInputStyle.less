@@ -43,7 +43,8 @@
   margin-top: 1em;
 }
 
-.relativePosition {
+.ettBarn {
+  &:extend(.marginTop);
   position: relative;
 }
 
@@ -145,14 +146,14 @@
   }
 
   &.foreldertabell {
-    td {
+    table-layout: fixed;
+    td, th {
       width: 20%;
     }
   }
 }
 
 .noTextWrap {
-  overflow: hidden;
   white-space: nowrap;
 }
 

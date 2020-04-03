@@ -27,7 +27,7 @@ const BarnInput = () => {
         render={arrayHelpers => (
           <div>
             {values.barn.map((barn, index) => (
-              <div key={barn.id} className="marginTop marginBetween relativePosition">
+              <div key={barn.id} className="ettBarn marginBetween">
                 {values.barn.length > 1 && (
                   <Flatknapp
                     htmlType="button"
