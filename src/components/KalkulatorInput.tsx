@@ -23,7 +23,13 @@ export const initForelderValue = () => ({
 
 const initialValues: OmsorgsdagerForm = {
   søker: {},
-  barn: [{ id: uuidv4() }],
+  barn: [
+    {
+      id: uuidv4(),
+      søkerHarAleneomsorgFor: false,
+      kroniskSykt: false,
+    },
+  ],
   foreldre: [initForelderValue()],
 };
 

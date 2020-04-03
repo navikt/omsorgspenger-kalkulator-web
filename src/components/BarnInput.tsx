@@ -54,10 +54,14 @@ const BarnInput = () => {
                   )}
                 </Field>
                 <Field name={`barn[${index}].kroniskSykt`}>
-                  {({ field }: FieldProps) => <Checkbox label={tekster('BarnInput.KroniskSykt')} {...field} />}
+                  {({ field }: FieldProps) => (
+                    <Checkbox label={tekster('BarnInput.KroniskSykt')} checked={field.value} {...field} />
+                  )}
                 </Field>
                 <Field name={`barn[${index}].søkerHarAleneomsorgFor`}>
-                  {({ field }: FieldProps) => <Checkbox label={tekster('BarnInput.Aleneomsorg')} {...field} />}
+                  {({ field }: FieldProps) => (
+                    <Checkbox label={tekster('BarnInput.Aleneomsorg')} checked={field.value} {...field} />
+                  )}
                 </Field>
                 {index < values.barn.length - 1 && <div className="verticalLine" />}
               </div>
