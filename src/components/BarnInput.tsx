@@ -6,8 +6,8 @@ import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { ReactComponent as TrashCan } from '../images/trash-can.svg';
-import { uuidv4 } from '../utils';
 import tekster from '../tekster';
+import { initBarnValue } from './KalkulatorInput';
 
 const BarnInput = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
@@ -69,7 +69,7 @@ const BarnInput = () => {
             <div className="flexJustifyCenter">
               <Flatknapp
                 htmlType="button"
-                onClick={() => arrayHelpers.push({ id: uuidv4() })}
+                onClick={() => arrayHelpers.push(initBarnValue())}
                 mini
                 form="kompakt"
                 className="marginTop"

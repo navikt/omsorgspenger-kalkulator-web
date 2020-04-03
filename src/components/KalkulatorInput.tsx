@@ -9,6 +9,12 @@ import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { uuidv4 } from '../utils';
 import SkjemaContext from './SkjemaContext';
 
+export const initBarnValue = () => ({
+  id: uuidv4(),
+  søkerHarAleneomsorgFor: false,
+  kroniskSykt: false,
+});
+
 export const initForelderValue = () => ({
   id: uuidv4(),
   normaldager: {
@@ -21,15 +27,9 @@ export const initForelderValue = () => ({
   },
 });
 
-const initialValues: OmsorgsdagerForm = {
+export const initialValues: OmsorgsdagerForm = {
   søker: {},
-  barn: [
-    {
-      id: uuidv4(),
-      søkerHarAleneomsorgFor: false,
-      kroniskSykt: false,
-    },
-  ],
+  barn: [initBarnValue()],
   foreldre: [initForelderValue()],
 };
 
