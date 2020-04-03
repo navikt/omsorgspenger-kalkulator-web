@@ -28,7 +28,6 @@ export const initForelderValue = () => ({
 });
 
 export const initialValues: OmsorgsdagerForm = {
-  søker: {},
   barn: [initBarnValue()],
   foreldre: [initForelderValue()],
 };

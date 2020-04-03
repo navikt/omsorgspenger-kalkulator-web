@@ -5,7 +5,7 @@ import {
   GRUNNRETTSDAGER_3_ELLER_FLER_BARN,
   omsorgsdager,
 } from './kalkulerOmsorgsdager';
-import Barn from '../types/Barn';
+import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 
@@ -20,15 +20,15 @@ describe('omsorgsdager', () => {
       {
         søkerHarAleneomsorgFor: true,
         kroniskSykt: true,
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '1',
       },
       {
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '2',
       },
       {
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '3',
       },
     ];
@@ -54,7 +54,7 @@ describe('omsorgsdager', () => {
   test('Man får ekstra dager hvis man har aleneomsorg for minst ett barn under 12, eller minst ett kronisk sykt barn', () => {
     const ettBarnOver12: Barn[] = [
       {
-        alder: 'over12',
+        alder: AlderEnum.OVER12,
         søkerHarAleneomsorgFor: true,
         id: '1',
       },
@@ -65,7 +65,7 @@ describe('omsorgsdager', () => {
 
     const ettKroniskSyktBarnOver12: Barn[] = [
       {
-        alder: 'over12',
+        alder: AlderEnum.OVER12,
         kroniskSykt: true,
         søkerHarAleneomsorgFor: true,
         id: '2',
@@ -77,7 +77,7 @@ describe('omsorgsdager', () => {
 
     const ettBarnUnder12: Barn[] = [
       {
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         søkerHarAleneomsorgFor: true,
         id: '3',
       },
@@ -91,17 +91,17 @@ describe('omsorgsdager', () => {
     const barn: Barn[] = [
       {
         søkerHarAleneomsorgFor: true,
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '1',
       },
       {
         søkerHarAleneomsorgFor: true,
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '2',
       },
       {
         søkerHarAleneomsorgFor: true,
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
         id: '3',
       },
     ];
@@ -118,7 +118,7 @@ describe('omsorgsdager', () => {
       barn: [
         {
           id: '1',
-          alder: 'under12',
+          alder: AlderEnum.UNDER12,
         },
       ],
       foreldre: [
@@ -149,7 +149,7 @@ describe('omsorgsdager', () => {
     const barn: Barn[] = [
       {
         id: '1',
-        alder: 'under12',
+        alder: AlderEnum.UNDER12,
       },
     ];
     const fårFlereDagerEnnGrunnrett: OmsorgsdagerForm = {
@@ -191,7 +191,7 @@ describe('omsorgsdager', () => {
 
   test('Fordelte dager trekkes fra', () => {
     const fordelteNormaldagerTrekkesFra: OmsorgsdagerForm = {
-      barn: [{ id: '3943339a-b27f-4e25-bcb3-a33581c71232', alder: 'under12' }],
+      barn: [{ id: '3943339a-b27f-4e25-bcb3-a33581c71232', alder: AlderEnum.UNDER12 }],
       foreldre: [
         {
           id: '695d5c9b-dbb2-4c74-810a-7aff411d123d',
@@ -208,7 +208,7 @@ describe('omsorgsdager', () => {
 
   test('Ignorerer forelder som ikke bare har positive heltall som input', () => {
     const inputverdier: OmsorgsdagerForm = {
-      barn: [{ id: '1', alder: 'under12' }],
+      barn: [{ id: '1', alder: AlderEnum.UNDER12 }],
       foreldre: [
         {
           id: '1',

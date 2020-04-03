@@ -4,6 +4,7 @@ import Resultat, { summerDager } from './Resultat';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import SkjemaContext from './SkjemaContext';
+import { treBarnEttKroniskOgAleneomsorg } from './testdata';
 
 test('Summerer alle omsorgsprinsipper', () => {
   const omsorgsprinsipper: Omsorgsprinsipper = {
@@ -36,22 +37,7 @@ test('Summerer alle omsorgsprinsipper', () => {
 
 test('Rendrer riktig resultat', () => {
   const initValues: OmsorgsdagerForm = {
-    barn: [
-      {
-        søkerHarAleneomsorgFor: true,
-        kroniskSykt: true,
-        alder: 'under12',
-        id: '1',
-      },
-      {
-        alder: 'under12',
-        id: '2',
-      },
-      {
-        alder: 'under12',
-        id: '3',
-      },
-    ],
+    barn: treBarnEttKroniskOgAleneomsorg,
     foreldre: [],
   };
   const { asFragment } = render(

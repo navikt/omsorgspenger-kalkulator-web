@@ -1,5 +1,5 @@
 import Omsorgsdager from '../types/Omsorgsdager';
-import Barn from '../types/Barn';
+import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Forelder from '../types/Forelder';
@@ -14,7 +14,7 @@ export const ALENEOMSORG_KRONISK_SYKT_BARN_DAGER: number = KRONISK_SYKT_BARN_DAG
 export const ALENEOMSORGDAGER_1_2_BARN: number = 10; // Eller midlertidig aleneomsorg
 export const ALENEOMSORGDAGER_3_ELLER_FLERE_BARN: number = 15; // Eller midlertidig aleneomsorg
 
-const harOmsorg = (barn: Barn): boolean => !!(barn.alder === 'under12' || barn.kroniskSykt);
+const harOmsorg = (barn: Barn): boolean => !!(barn.alder === AlderEnum.UNDER12 || barn.kroniskSykt);
 
 export const grunnrettsdager = (barn: Barn[]): Omsorgsdager => {
   const antallTellendeBarn = barn.filter(harOmsorg).length;
