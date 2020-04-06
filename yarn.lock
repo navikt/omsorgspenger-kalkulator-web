@@ -6943,10 +6943,25 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+nav-frontend-alertstriper-style@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/nav-frontend-alertstriper-style/-/nav-frontend-alertstriper-style-2.0.12.tgz#ef4aa2fb67a7fa0735e2dbc5e8847984372736e8"
+  integrity sha512-ckOW3Efa7YXb+Dn1O8EX7Uzk0nk6LLcv4lRkFIws1Hk70V8yaqtfbqARCe2QLavHC5xbiLQ3OB65I7XOZB/v1w==
+
+nav-frontend-alertstriper@^3.0.14:
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/nav-frontend-alertstriper/-/nav-frontend-alertstriper-3.0.14.tgz#2c5096b5092183fac06c3354a7d778108ab8cc51"
+  integrity sha512-Q2ZPgHM46fxNOWaX7xI5UBuwtWTd/pIuJdZUK54wovkMNTqHMORRRswKRXB271ICdQGBgySTCeY7Ke1/L2c9zw==
+
 nav-frontend-core@^4.0.12:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/nav-frontend-core/-/nav-frontend-core-4.0.12.tgz#e0577ddec4f81f1f411a0a0c3fad8e5fa215bbba"
   integrity sha512-xgkTQ2PzN8qYMkLZ+5qj5Dy6kpMHbfAW/y8suvsiLNAGq/KD/gTCzrGb6ypQ6i0CKMQO7cy9w8Kc8/MmhVpSNw==
+
+nav-frontend-ikoner-assets@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/nav-frontend-ikoner-assets/-/nav-frontend-ikoner-assets-2.0.1.tgz#82060b7f4f67255eeca55d6823b04a565ba53f3c"
+  integrity sha512-b3Xvu9XdpGQQO0y1G5f9Rikq1Q77m5ua6DJniKRq1pNG5X3z4qssj7ZO8LGRQ4gLl7D02zckK/QgaQ3bzfpRng==
 
 nav-frontend-js-utils@^1.0.8:
   version "1.0.8"
