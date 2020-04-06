@@ -1,5 +1,10 @@
 import Barn, { AlderEnum } from '../types/Barn';
 
+export const barnUnder12: Barn = {
+  alder: AlderEnum.UNDER12,
+  id: '1',
+};
+
 export const treBarnEttKroniskOgAleneomsorg: Barn[] = [
   {
     søkerHarAleneomsorgFor: true,

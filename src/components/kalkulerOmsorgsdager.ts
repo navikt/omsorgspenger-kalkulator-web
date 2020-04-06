@@ -1,7 +1,6 @@
 import Omsorgsdager from '../types/Omsorgsdager';
 import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Forelder from '../types/Forelder';
 import { kunPositiveHeltall } from './validators';
 

@@ -4,7 +4,7 @@ import Resultat, { summerDager } from './Resultat';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import SkjemaContext from './SkjemaContext';
-import { treBarnEttKroniskOgAleneomsorg } from './testdata';
+import { barnUnder12, treBarnEttKroniskOgAleneomsorg } from './testdata';
 import Omsorgsdager from '../types/Omsorgsdager';
 
 test('Summerer alle omsorgsprinsipper', () => {
@@ -41,6 +41,33 @@ test('Rendrer riktig resultat', () => {
     barn: treBarnEttKroniskOgAleneomsorg,
     foreldre: [],
   };
+  const { asFragment } = render(
+    <SkjemaContext initialValues={initValues}>
+      <Resultat />
+    </SkjemaContext>,
+  );
+
+  expect(asFragment()).toMatchSnapshot();
+});
+
+test('Rendrer advarsel hvis man overfører fler dager enn man kan', () => {
+  const initValues: OmsorgsdagerForm = {
+    barn: [barnUnder12],
+    foreldre: [
+      {
+        id: '1',
+        normaldager: {
+          dagerFått: 0,
+          dagerTildelt: 11,
+        },
+        koronadager: {
+          dagerTildelt: 11,
+          dagerFått: 0,
+        },
+      },
+    ],
+  };
+
   const { asFragment } = render(
     <SkjemaContext initialValues={initValues}>
       <Resultat />
