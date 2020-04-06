@@ -3,103 +3,104 @@
 exports[`Rendrer riktig resultat 1`] = `
 <DocumentFragment>
   <div
-    class="arrowUp"
-  />
-  <div
-    class="resultatHeader"
+    class="resultatContainer"
   >
-    <p
-      class="typo-element"
+    <div
+      class="resultatHeader"
     >
-      Søkeren har rett på
-    </p>
-    <p
-      class="typo-element dagerOmsorg"
+      <p
+        class="typo-element"
+      >
+        Søkeren har rett på
+      </p>
+      <p
+        class="typo-element dagerOmsorg"
+      >
+        90 dager med omsorgspenger
+      </p>
+    </div>
+    <table
+      class="tabell tabell--stripet"
     >
-      90 dager med omsorgspenger
-    </p>
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Dager
+          </th>
+          <th>
+            Korona-tillegg
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Grunnrett
+          </td>
+          <td>
+            15
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            15
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Barn med kronisk sykdom
+          </td>
+          <td>
+            -
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Aleneomsorg for barn med kronisk sykdom
+          </td>
+          <td>
+            20
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            20
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Alene om omsorgen
+          </td>
+          <td>
+            10
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            10
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Overført/Mottatt
+          </td>
+          <td>
+            -
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table
-    class="tabell tabell--stripet"
-  >
-    <thead>
-      <tr>
-        <th />
-        <th>
-          Dager
-        </th>
-        <th>
-          Korona-tillegg
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Grunnrett
-        </td>
-        <td>
-          15
-        </td>
-        <td
-          class="koronabakgrunn"
-        >
-          15
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Barn med kronisk sykdom
-        </td>
-        <td>
-          -
-        </td>
-        <td
-          class="koronabakgrunn"
-        >
-          -
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Aleneomsorg for barn med kronisk sykdom
-        </td>
-        <td>
-          20
-        </td>
-        <td
-          class="koronabakgrunn"
-        >
-          20
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Alene om omsorgen
-        </td>
-        <td>
-          10
-        </td>
-        <td
-          class="koronabakgrunn"
-        >
-          10
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Overført/Mottatt
-        </td>
-        <td>
-          -
-        </td>
-        <td
-          class="koronabakgrunn"
-        >
-          -
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </DocumentFragment>
 `;
