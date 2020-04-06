@@ -4,15 +4,12 @@ import {
   ALENEOMSORGDAGER_3_ELLER_FLERE_BARN,
   GRUNNRETTSDAGER_3_ELLER_FLER_BARN,
   omsorgsdager,
+  overføringsdager as beregnOverføringsdager,
 } from './kalkulerOmsorgsdager';
 import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
-
-const omsorgsdagerForm = (barn: Barn[]): OmsorgsdagerForm => ({
-  barn,
-  foreldre: [],
-});
+import Forelder from '../types/Forelder';
 
 describe('omsorgsdager', () => {
   test('3 barn derav ett man har aleneomsorg for og er kronisk sykt', () => {
@@ -33,10 +30,7 @@ describe('omsorgsdager', () => {
       },
     ];
 
-    // @ts-ignore
-    const { aleneomsorgKroniskSyke, kroniskSykt, grunnrett, aleneomsorg }: Omsorgsprinsipper = omsorgsdager(
-      omsorgsdagerForm(barn),
-    );
+    const { aleneomsorgKroniskSyke, kroniskSykt, grunnrett, aleneomsorg }: Omsorgsprinsipper = omsorgsdager(barn);
 
     expect(grunnrett.normaldager).toEqual(GRUNNRETTSDAGER_3_ELLER_FLER_BARN);
     expect(grunnrett.koronadager).toEqual(GRUNNRETTSDAGER_3_ELLER_FLER_BARN);
@@ -59,7 +53,7 @@ describe('omsorgsdager', () => {
         id: '1',
       },
     ];
-    const aleneomsorg1 = omsorgsdager(omsorgsdagerForm(ettBarnOver12))?.aleneomsorg;
+    const aleneomsorg1 = omsorgsdager(ettBarnOver12)?.aleneomsorg;
     expect(aleneomsorg1?.normaldager).toEqual(0);
     expect(aleneomsorg1?.koronadager).toEqual(0);
 
@@ -71,7 +65,7 @@ describe('omsorgsdager', () => {
         id: '2',
       },
     ];
-    const aleneomsorg2 = omsorgsdager(omsorgsdagerForm(ettKroniskSyktBarnOver12))?.aleneomsorg;
+    const aleneomsorg2 = omsorgsdager(ettKroniskSyktBarnOver12)?.aleneomsorg;
     expect(aleneomsorg2?.normaldager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
     expect(aleneomsorg2?.koronadager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
 
@@ -82,7 +76,7 @@ describe('omsorgsdager', () => {
         id: '3',
       },
     ];
-    const aleneomsorg3 = omsorgsdager(omsorgsdagerForm(ettBarnUnder12))?.aleneomsorg;
+    const aleneomsorg3 = omsorgsdager(ettBarnUnder12)?.aleneomsorg;
     expect(aleneomsorg3?.normaldager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
     expect(aleneomsorg3?.koronadager).toEqual(ALENEOMSORGDAGER_1_2_BARN);
   });
@@ -106,43 +100,33 @@ describe('omsorgsdager', () => {
       },
     ];
 
-    // @ts-ignore
-    const { aleneomsorg }: Omsorgsprinsipper = omsorgsdager(omsorgsdagerForm(barn));
+    const { aleneomsorg }: Omsorgsprinsipper = omsorgsdager(barn);
 
     expect(aleneomsorg?.normaldager).toEqual(ALENEOMSORGDAGER_3_ELLER_FLERE_BARN);
     expect(aleneomsorg?.koronadager).toEqual(ALENEOMSORGDAGER_3_ELLER_FLERE_BARN);
   });
 
   test('Overførte koronadager legges rett til i totalen', () => {
-    const input: OmsorgsdagerForm = {
-      barn: [
-        {
-          id: '1',
-          alder: AlderEnum.UNDER12,
+    const overføringsdager = [
+      {
+        id: '1',
+        koronadager: {
+          dagerTildelt: 10,
+          dagerFått: 20,
         },
-      ],
-      foreldre: [
-        {
-          id: '1',
-          koronadager: {
-            dagerTildelt: 10,
-            dagerFått: 20,
-          },
+      },
+      {
+        id: '2',
+        koronadager: {
+          dagerTildelt: 5,
+          dagerFått: 7,
         },
-        {
-          id: '2',
-          koronadager: {
-            dagerTildelt: 5,
-            dagerFått: 7,
-          },
-        },
-      ],
-    };
+      },
+    ];
 
-    // @ts-ignore
-    const { overføringsdager } = omsorgsdager(input);
+    const dager = beregnOverføringsdager(overføringsdager, 10);
 
-    expect(overføringsdager?.koronadager).toEqual(12);
+    expect(dager.koronadager).toEqual(12);
   });
 
   test('Man får mellomlegget av tildelte dager og grunnretten, dersom tildelte dager er større enn grunnretten', () => {
@@ -152,58 +136,52 @@ describe('omsorgsdager', () => {
         alder: AlderEnum.UNDER12,
       },
     ];
-    const fårFlereDagerEnnGrunnrett: OmsorgsdagerForm = {
-      barn,
-      foreldre: [
-        {
-          id: '1',
-          normaldager: {
-            dagerFått: 6,
-          },
+    const mottattFlereDagerEnnGrunnrett: Forelder[] = [
+      {
+        id: '1',
+        normaldager: {
+          dagerFått: 6,
         },
-        {
-          id: '2',
-          normaldager: {
-            dagerFått: 6,
-          },
+      },
+      {
+        id: '2',
+        normaldager: {
+          dagerFått: 6,
         },
-      ],
-    };
-    // @ts-ignore
-    const overførteNormaldager_flere = omsorgsdager(fårFlereDagerEnnGrunnrett)?.overføringsdager.normaldager;
-    expect(overførteNormaldager_flere).toEqual(2);
+      },
+    ];
 
-    const fårFærreDagerEnnGrunnrett: OmsorgsdagerForm = {
-      barn,
-      foreldre: [
-        {
-          id: '1',
-          normaldager: {
-            dagerFått: 8,
-          },
+    const { grunnrett } = omsorgsdager(barn);
+    const overførteNormaldager_flere = beregnOverføringsdager(mottattFlereDagerEnnGrunnrett, grunnrett.normaldager);
+    expect(overførteNormaldager_flere.normaldager).toEqual(2);
+
+    const mottattFærreDagerEnnGrunnrett = [
+      {
+        id: '1',
+        normaldager: {
+          dagerFått: 8,
         },
-      ],
-    };
-    // @ts-ignore
-    const overførteNormaldager_færre = omsorgsdager(fårFærreDagerEnnGrunnrett)?.overføringsdager.normaldager;
-    expect(overførteNormaldager_færre).toEqual(0);
+      },
+    ];
+
+    const overførteNormaldager_færre = beregnOverføringsdager(mottattFærreDagerEnnGrunnrett, grunnrett.normaldager);
+    expect(overførteNormaldager_færre.normaldager).toEqual(0);
   });
 
   test('Fordelte dager trekkes fra', () => {
-    const fordelteNormaldagerTrekkesFra: OmsorgsdagerForm = {
-      barn: [{ id: '3943339a-b27f-4e25-bcb3-a33581c71232', alder: AlderEnum.UNDER12 }],
-      foreldre: [
-        {
-          id: '695d5c9b-dbb2-4c74-810a-7aff411d123d',
-          normaldager: { dagerFått: 3, dagerTildelt: 8 },
-          koronadager: { dagerFått: 2, dagerTildelt: 4 },
-        },
-      ],
-    };
+    const ettBarnUnder12: Barn[] = [{ id: '3943339a-b27f-4e25-bcb3-a33581c71232', alder: AlderEnum.UNDER12 }];
+    const fordeltMerEnnMottatt = [
+      {
+        id: '695d5c9b-dbb2-4c74-810a-7aff411d123d',
+        normaldager: { dagerFått: 3, dagerTildelt: 8 },
+        koronadager: { dagerFått: 2, dagerTildelt: 4 },
+      },
+    ];
 
-    const overføringsdager = omsorgsdager(fordelteNormaldagerTrekkesFra)?.overføringsdager;
-    expect(overføringsdager?.normaldager).toEqual(-8);
-    expect(overføringsdager?.koronadager).toEqual(-2);
+    const { grunnrett } = omsorgsdager(ettBarnUnder12);
+    const overføringsdager = beregnOverføringsdager(fordeltMerEnnMottatt, grunnrett.normaldager);
+    expect(overføringsdager.normaldager).toEqual(-8);
+    expect(overføringsdager.koronadager).toEqual(-2);
   });
 
   test('Ignorerer forelder som ikke bare har positive heltall som input', () => {
@@ -223,10 +201,11 @@ describe('omsorgsdager', () => {
       ],
     };
 
-    const overføringsdager = omsorgsdager(inputverdier)?.overføringsdager;
+    const { grunnrett } = omsorgsdager(inputverdier.barn);
+    const overføringsdager = beregnOverføringsdager(inputverdier.foreldre, grunnrett.normaldager);
 
-    expect(overføringsdager?.normaldager).toEqual(0);
-    expect(overføringsdager?.koronadager).toEqual(5);
+    expect(overføringsdager.normaldager).toEqual(0);
+    expect(overføringsdager.koronadager).toEqual(5);
   });
 
   test('Overføringsdager beregnes selv om ingen barn er gyldig utfylt', () => {
@@ -247,9 +226,10 @@ describe('omsorgsdager', () => {
       ],
     };
 
-    const overføringsdager = omsorgsdager(ingenBarnUtfylt)?.overføringsdager;
+    const { grunnrett } = omsorgsdager(ingenBarnUtfylt.barn);
+    const overføringsdager = beregnOverføringsdager(ingenBarnUtfylt.foreldre, grunnrett.normaldager);
 
-    expect(overføringsdager?.normaldager).toEqual(5);
-    expect(overføringsdager?.koronadager).toEqual(10);
+    expect(overføringsdager.normaldager).toEqual(5);
+    expect(overføringsdager.koronadager).toEqual(10);
   });
 });

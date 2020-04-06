@@ -1,8 +1,8 @@
-interface StringMap {
-  [nøkkel: string]: string;
-}
+type Map = {
+  [nøkkel in string | number]: string;
+};
 
-const tekstMap: StringMap = {
+const tekstMap: Map = {
   'KalkulatorHeader.Overskrift': 'Omsorgsdagerkalkulator',
   'KalkulatorHeader.Nullstill': 'Nullstill',
   'BarnInput.Overskrift': 'Barn som bor hos søker',
@@ -32,8 +32,18 @@ const tekstMap: StringMap = {
   'SøkerInput.AleneKroniskSykdom': 'Aleneomsorg for barn med kronisk sykdom',
   'SøkerInput.AleneOmOmsorg': 'Alene om omsorgen',
   'SøkerInput.OverførtMottatt': 'Overført/Mottatt',
+  'Resultat.AdvarselKorona':
+    'Du har overført $overførteDager koronadager, men har kun $tilgjengeligeDager tilgjengelig. Vennligst sjekk antallet',
+  'Resultat.AdvarselNormal':
+    'Du har overført/fordelt $overførteDager normaldager, men har kun $tilgjengeligeDager tilgjengelig. Vennligst sjekk antallet',
 };
 
-const tekster = (tekstnøkkel: string): string => tekstMap[tekstnøkkel];
+const tekster = (tekstnøkkel: string, values?: Map): string => {
+  if (values) {
+    return Object.entries(values).reduce((str, [key, value]) => str.replace(`$${key}`, value), tekstMap[tekstnøkkel]);
+  }
+
+  return tekstMap[tekstnøkkel];
+};
 
 export default tekster;

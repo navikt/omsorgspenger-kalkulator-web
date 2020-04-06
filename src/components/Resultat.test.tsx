@@ -5,6 +5,7 @@ import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import SkjemaContext from './SkjemaContext';
 import { treBarnEttKroniskOgAleneomsorg } from './testdata';
+import Omsorgsdager from '../types/Omsorgsdager';
 
 test('Summerer alle omsorgsprinsipper', () => {
   const omsorgsprinsipper: Omsorgsprinsipper = {
@@ -24,13 +25,13 @@ test('Summerer alle omsorgsprinsipper', () => {
       normaldager: 20,
       koronadager: 20,
     },
-    overføringsdager: {
-      koronadager: -12,
-      normaldager: -4,
-    },
   };
 
-  const sum = summerDager(omsorgsprinsipper);
+  const overføringsdager: Omsorgsdager = {
+    koronadager: -12,
+    normaldager: -4,
+  };
+  const sum = summerDager(...Object.values(omsorgsprinsipper), overføringsdager);
 
   expect(sum).toEqual(94);
 });

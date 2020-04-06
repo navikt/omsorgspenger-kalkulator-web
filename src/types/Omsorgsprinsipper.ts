@@ -5,7 +5,6 @@ interface Omsorgsprinsipper {
   kroniskSykt: Omsorgsdager;
   aleneomsorgKroniskSyke: Omsorgsdager;
   aleneomsorg: Omsorgsdager;
-  overføringsdager: Omsorgsdager;
 }
 
 export default Omsorgsprinsipper;

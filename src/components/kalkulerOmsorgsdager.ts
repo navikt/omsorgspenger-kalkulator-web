@@ -61,7 +61,7 @@ const bareGyldigeDager = (forelder: Forelder): boolean =>
     forelder.koronadager?.dagerTildelt,
   ].every(dager => !kunPositiveHeltall(dager || 0));
 
-const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsorgsdager => {
+export const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsorgsdager => {
   const { koronadager, mottatteNormaldager, fordelteNormaldager } = foreldre.filter(bareGyldigeDager).reduce(
     (tmpDager, forelder) => ({
       koronadager:
@@ -85,16 +85,13 @@ const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsor
   };
 };
 
-export const omsorgsdager = ({ barn = [], foreldre }: OmsorgsdagerForm): Omsorgsprinsipper | null => {
+export const omsorgsdager = (barn: Barn[] = []): Omsorgsprinsipper => {
   const barnMinimumUtfylt: Barn[] = barn.filter(b => b.alder);
 
-  const grunnrett = grunnrettsdager(barnMinimumUtfylt);
-
   return {
-    grunnrett,
+    grunnrett: grunnrettsdager(barnMinimumUtfylt),
     kroniskSykt: kroniskSyktDager(barnMinimumUtfylt),
     aleneomsorg: aleneomsorgsdager(barnMinimumUtfylt),
     aleneomsorgKroniskSyke: aleneomsorgKroniskSykeDager(barnMinimumUtfylt),
-    overføringsdager: overføringsdager(foreldre, grunnrett.normaldager),
   };
 };
