@@ -61,7 +61,18 @@ const BarnInput = () => {
                 </Field>
                 <Field name={`barn[${index}].søkerHarAleneomsorgFor`}>
                   {({ field }: FieldProps) => (
-                    <Checkbox label={tekster('BarnInput.Aleneomsorg')} checked={field.value} {...field} />
+                    <Checkbox
+                      label={
+                        <>
+                          <div>
+                            <b>{tekster('BarnInput.Aleneomsorg')}</b>
+                          </div>
+                          <div>{tekster('BarnInput.Aleneomsorg.Hjelpetekst')}</div>
+                        </>
+                      }
+                      checked={field.value}
+                      {...field}
+                    />
                   )}
                 </Field>
                 {index < values.barn.length - 1 && <div className="verticalLine" />}

@@ -9,8 +9,9 @@ const tekstMap: StringMap = {
   'BarnInput.Fjern': 'Fjern',
   'BarnInput.Alder': 'Hvor gammelt er barnet?',
   'BarnInput.KroniskSykt': 'Barnet er kronisk sykt',
-  'BarnInput.Aleneomsorg':
-    'Søker har aleneomsorg for barnet (inkl. de som har vedtak om å bli regnet som alene om omsorgen og de som skal anses å være alene med særkullsbarn)',
+  'BarnInput.Aleneomsorg': 'Søker har aleneomsorg for barnet',
+  'BarnInput.Aleneomsorg.Hjelpetekst':
+    '(inkl. de som har vedtak om å bli regnet som alene om omsorgen og de som skal anses å være alene med særkullsbarn)',
   'BarnInput.LeggTilBarn': 'Legg til flere barn',
   'ForeldreInput.Overskrift': 'Foreldre - overførte og fordelte dager',
   'ForeldreInput.NormalForskrift': 'Opprinnelige regler',
