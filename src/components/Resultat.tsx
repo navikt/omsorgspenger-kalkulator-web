@@ -18,8 +18,7 @@ const Resultat: FunctionComponent = () => {
   const totaltAntallDager = useMemo(() => omsorgsdager(values), [values]);
 
   return (
-    <>
-      <div className="arrowUp" />
+    <div className="resultatContainer">
       <div className="resultatHeader">
         <Element>{tekster('SøkerInput.HarRettPå')}</Element>
         <Element className="dagerOmsorg">
@@ -62,7 +61,7 @@ const Resultat: FunctionComponent = () => {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

@@ -33,18 +33,20 @@ export const initialValues: OmsorgsdagerForm = {
 };
 
 const KalkulatorInput = () => (
-  <div className="inputContainer">
-    <SkjemaContext initialValues={initialValues}>
-      {() => (
-        <Form>
+  <SkjemaContext initialValues={initialValues}>
+    <Form>
+      <div className="inputContainer">
+        <div className="kalkulatorInput">
           <KalkulatorHeader />
           <BarnInput />
           <ForeldreInput />
+        </div>
+        <div className="resultat">
           <Resultat />
-        </Form>
-      )}
-    </SkjemaContext>
-  </div>
+        </div>
+      </div>
+    </Form>
+  </SkjemaContext>
 );
 
 export default KalkulatorInput;

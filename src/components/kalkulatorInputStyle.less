@@ -16,10 +16,20 @@
 }
 
 .inputContainer {
-  width: 800px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
   margin-top: 2em;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.kalkulatorInput {
+  max-width: 800px;
+  margin: 0 2em;
+}
+
+.resultat {
+  margin-right: 2em;
+  position: relative;
 }
 
 .foreldreInput {
@@ -74,25 +84,29 @@
 }
 
 .resultatContainer {
-  padding: 1em;
-}
-
-.arrowUp {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 15px solid #e0f5fb;
-  margin-right: auto;
-  margin-left: auto;
+  position: sticky;
+  top: 2em;
+  padding-left: 0.5em;
+  border-left: 1em solid #e0f5fb;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 13px solid #e0f5fb;
+    top: 50%;
+    position: absolute;
+    left: -1.7em;
+  }
 }
 
 .resultatHeader {
   background-color: #e0f5fb;
   text-align: center;
   padding: 1em;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .resultatHeader .dagerOmsorg {
