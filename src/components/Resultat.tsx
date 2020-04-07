@@ -3,11 +3,16 @@ import { useFormikContext } from 'formik';
 import { Element } from 'nav-frontend-typografi';
 import 'nav-frontend-tabell-style';
 import AlertStripe from 'nav-frontend-alertstriper';
-import { omsorgsdager as beregnOmsorgsdager, overføringsdager } from './kalkulerOmsorgsdager';
+import {
+  effektiveOverføringsdager,
+  omsorgsdager as beregnOmsorgsdager,
+  sumOverføringsdager,
+} from './kalkulerOmsorgsdager';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import tekster from '../tekster';
 import Omsorgsdager from '../types/Omsorgsdager';
+import Overføringsdager from '../types/Overføringsdager';
 
 export const summerDager = (...omsorgsdager: Omsorgsdager[]): number =>
   omsorgsdager
@@ -28,38 +33,41 @@ export const summerOmsorgsdager = (omsorgsprinsipper: Omsorgsprinsipper): Omsorg
 const Resultat: FunctionComponent = () => {
   const { barn, foreldre } = useFormikContext<OmsorgsdagerForm>().values;
   const omsorgsdager = useMemo<Omsorgsprinsipper>(() => beregnOmsorgsdager(barn), [barn]);
-  const overføring: Omsorgsdager = overføringsdager(foreldre, omsorgsdager.grunnrett.normaldager);
 
-  const sumDager = useMemo<number>(() => summerDager(...Object.values(omsorgsdager), overføring), [
+  const overføringsdager = useMemo<Overføringsdager>(() => sumOverføringsdager(foreldre), [foreldre]);
+
+  const effektivtOverført = effektiveOverføringsdager(overføringsdager, omsorgsdager.grunnrett.normaldager);
+  const totaltAntallDager = useMemo<number>(() => summerDager(...Object.values(omsorgsdager), effektivtOverført), [
     omsorgsdager,
-    overføring,
+    effektivtOverført,
   ]);
-
   const sumOmsorgsdager = useMemo<Omsorgsdager>(() => summerOmsorgsdager(omsorgsdager), [omsorgsdager]);
+
+  const harOverførtFlerNormaldagerEnnTilgjengelig =
+    overføringsdager.fordelteNormaldager > sumOmsorgsdager.normaldager - omsorgsdager.grunnrett.normaldager;
+  const harOverførtFlerKoronadagerEnnTilgjengelig = overføringsdager.overførteKoronadager > sumOmsorgsdager.koronadager;
 
   return (
     <div className="resultatContainer">
-      {-overføring.normaldager > sumOmsorgsdager.normaldager && (
+      {harOverførtFlerNormaldagerEnnTilgjengelig && (
         <AlertStripe type="advarsel">
           {tekster('Resultat.AdvarselNormal', {
-            overførteDager: `${-overføring.normaldager}`,
-            tilgjengeligeDager: `${sumOmsorgsdager.normaldager}`,
+            overførteDager: `${overføringsdager.fordelteNormaldager}`,
+            tilgjengeligeDager: `${sumOmsorgsdager.normaldager - omsorgsdager.grunnrett.normaldager}`,
           })}
         </AlertStripe>
       )}
-      {-overføring.koronadager > sumOmsorgsdager.koronadager && (
+      {harOverførtFlerKoronadagerEnnTilgjengelig && (
         <AlertStripe type="advarsel">
           {tekster('Resultat.AdvarselKorona', {
-            overførteDager: `${-overføring.koronadager}`,
+            overførteDager: `${overføringsdager.overførteKoronadager}`,
             tilgjengeligeDager: `${sumOmsorgsdager.koronadager}`,
           })}
         </AlertStripe>
       )}
       <div className="resultatHeader">
         <Element>{tekster('SøkerInput.HarRettPå')}</Element>
-        <Element className="dagerOmsorg">
-          {omsorgsdager ? `${sumDager} ${tekster('SøkerInput.DagerOmsorgspenger')}` : '-'}
-        </Element>
+        <Element className="dagerOmsorg">{`${totaltAntallDager} ${tekster('SøkerInput.DagerOmsorgspenger')}`}</Element>
       </div>
       <table className="tabell tabell--stripet">
         <thead>
@@ -92,8 +100,8 @@ const Resultat: FunctionComponent = () => {
           </tr>
           <tr>
             <td>{tekster('SøkerInput.OverførtMottatt')}</td>
-            <td>{overføring.normaldager || '-'}</td>
-            <td className="koronabakgrunn">{overføring.koronadager || '-'}</td>
+            <td>{effektivtOverført.normaldager || '-'}</td>
+            <td className="koronabakgrunn">{effektivtOverført.koronadager || '-'}</td>
           </tr>
         </tbody>
       </table>

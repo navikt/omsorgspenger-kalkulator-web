@@ -1,4 +1,4 @@
-import tekster from '../tekster';
+import tekster from './tekster';
 
 test('Erstatter value key med oppgitt verdi', () => {
   const tekst = tekster('Resultat.AdvarselNormal', {
@@ -7,6 +7,6 @@ test('Erstatter value key med oppgitt verdi', () => {
   });
 
   expect(tekst).toEqual(
-    'Du har overført/fordelt 20 normaldager, men har kun 10 tilgjengelig. Vennligst sjekk antallet',
+    'Søkeren har overført/fordelt 20 normaldager, men har kun 10 dager som kan fordeles/overføres. Vennligst sjekk antallet',
   );
 });

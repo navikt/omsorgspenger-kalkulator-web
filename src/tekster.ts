@@ -43,9 +43,9 @@ const tekstMap: Map = {
   'SøkerInput.AleneOmOmsorg': 'Alene om omsorgen',
   'SøkerInput.OverførtMottatt': 'Overført/Mottatt',
   'Resultat.AdvarselKorona':
-    'Du har overført $overførteDager koronadager, men har kun $tilgjengeligeDager tilgjengelig. Vennligst sjekk antallet',
+    'Søkeren har overført $overførteDager koronadager, men har kun $tilgjengeligeDager koronadager som kan overføres. Vennligst sjekk antallet',
   'Resultat.AdvarselNormal':
-    'Du har overført/fordelt $overførteDager normaldager, men har kun $tilgjengeligeDager tilgjengelig. Vennligst sjekk antallet',
+    'Søkeren har overført/fordelt $overførteDager normaldager, men har kun $tilgjengeligeDager dager som kan fordeles/overføres. Vennligst sjekk antallet',
 };
 
 const tekster = (tekstnøkkel: string, values?: Map): string => {

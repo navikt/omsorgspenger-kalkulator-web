@@ -3,6 +3,7 @@ import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import Forelder from '../types/Forelder';
 import { kunPositiveHeltall } from './validators';
+import Overføringsdager from '../types/Overføringsdager';
 
 export const GRUNNRETTSDAGER_1_2_BARN: number = 10;
 export const GRUNNRETTSDAGER_3_ELLER_FLER_BARN: number = 15;
@@ -60,29 +61,34 @@ const bareGyldigeDager = (forelder: Forelder): boolean =>
     forelder.koronadager?.dagerTildelt,
   ].every(dager => !kunPositiveHeltall(dager || 0));
 
-export const overføringsdager = (foreldre: Forelder[], grunnrettsdager: number): Omsorgsdager => {
-  const { koronadager, mottatteNormaldager, fordelteNormaldager } = foreldre.filter(bareGyldigeDager).reduce(
-    (tmpDager, forelder) => ({
-      koronadager:
-        tmpDager.koronadager + (forelder.koronadager?.dagerFått || 0) - (forelder.koronadager?.dagerTildelt || 0),
-      mottatteNormaldager: tmpDager.mottatteNormaldager + (forelder.normaldager?.dagerFått || 0),
-      fordelteNormaldager: tmpDager.fordelteNormaldager + (forelder.normaldager?.dagerTildelt || 0),
-    }),
-    {
-      koronadager: 0,
-      mottatteNormaldager: 0,
-      fordelteNormaldager: 0,
-    },
-  );
-
+export const effektiveOverføringsdager = (
+  { overførteKoronadager, mottatteKoronadager, fordelteNormaldager, mottatteNormaldager }: Overføringsdager,
+  grunnrettsdager: number,
+): Omsorgsdager => {
   const dagerMottattEtterGrunnretten =
     mottatteNormaldager > grunnrettsdager ? mottatteNormaldager - grunnrettsdager : 0;
 
   return {
-    koronadager,
+    koronadager: mottatteKoronadager - overførteKoronadager,
     normaldager: dagerMottattEtterGrunnretten - fordelteNormaldager,
   };
 };
+
+export const sumOverføringsdager = (foreldre: Forelder[]): Overføringsdager =>
+  foreldre.filter(bareGyldigeDager).reduce(
+    (tmpDager, forelder) => ({
+      overførteKoronadager: tmpDager.overførteKoronadager + (forelder.koronadager?.dagerTildelt || 0),
+      mottatteKoronadager: tmpDager.mottatteKoronadager + (forelder.koronadager?.dagerFått || 0),
+      mottatteNormaldager: tmpDager.mottatteNormaldager + (forelder.normaldager?.dagerFått || 0),
+      fordelteNormaldager: tmpDager.fordelteNormaldager + (forelder.normaldager?.dagerTildelt || 0),
+    }),
+    {
+      overførteKoronadager: 0,
+      mottatteKoronadager: 0,
+      mottatteNormaldager: 0,
+      fordelteNormaldager: 0,
+    },
+  );
 
 export const omsorgsdager = (barn: Barn[] = []): Omsorgsprinsipper => {
   const barnMinimumUtfylt: Barn[] = barn.filter(b => b.alder);

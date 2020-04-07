@@ -4,7 +4,8 @@ import {
   ALENEOMSORGDAGER_3_ELLER_FLERE_BARN,
   GRUNNRETTSDAGER_3_ELLER_FLER_BARN,
   omsorgsdager,
-  overføringsdager as beregnOverføringsdager,
+  effektiveOverføringsdager,
+  sumOverføringsdager,
 } from './kalkulerOmsorgsdager';
 import Barn, { AlderEnum } from '../types/Barn';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
@@ -107,7 +108,7 @@ describe('omsorgsdager', () => {
   });
 
   test('Overførte koronadager legges rett til i totalen', () => {
-    const overføringsdager = [
+    const overføringsdager: Forelder[] = [
       {
         id: '1',
         koronadager: {
@@ -124,7 +125,7 @@ describe('omsorgsdager', () => {
       },
     ];
 
-    const dager = beregnOverføringsdager(overføringsdager, 10);
+    const dager = effektiveOverføringsdager(sumOverføringsdager(overføringsdager), 10);
 
     expect(dager.koronadager).toEqual(12);
   });
@@ -152,7 +153,10 @@ describe('omsorgsdager', () => {
     ];
 
     const { grunnrett } = omsorgsdager(barn);
-    const overførteNormaldager_flere = beregnOverføringsdager(mottattFlereDagerEnnGrunnrett, grunnrett.normaldager);
+    const overførteNormaldager_flere = effektiveOverføringsdager(
+      sumOverføringsdager(mottattFlereDagerEnnGrunnrett),
+      grunnrett.normaldager,
+    );
     expect(overførteNormaldager_flere.normaldager).toEqual(2);
 
     const mottattFærreDagerEnnGrunnrett = [
@@ -164,7 +168,10 @@ describe('omsorgsdager', () => {
       },
     ];
 
-    const overførteNormaldager_færre = beregnOverføringsdager(mottattFærreDagerEnnGrunnrett, grunnrett.normaldager);
+    const overførteNormaldager_færre = effektiveOverføringsdager(
+      sumOverføringsdager(mottattFærreDagerEnnGrunnrett),
+      grunnrett.normaldager,
+    );
     expect(overførteNormaldager_færre.normaldager).toEqual(0);
   });
 
@@ -179,7 +186,10 @@ describe('omsorgsdager', () => {
     ];
 
     const { grunnrett } = omsorgsdager(ettBarnUnder12);
-    const overføringsdager = beregnOverføringsdager(fordeltMerEnnMottatt, grunnrett.normaldager);
+    const overføringsdager = effektiveOverføringsdager(
+      sumOverføringsdager(fordeltMerEnnMottatt),
+      grunnrett.normaldager,
+    );
     expect(overføringsdager.normaldager).toEqual(-8);
     expect(overføringsdager.koronadager).toEqual(-2);
   });
@@ -202,7 +212,10 @@ describe('omsorgsdager', () => {
     };
 
     const { grunnrett } = omsorgsdager(inputverdier.barn);
-    const overføringsdager = beregnOverføringsdager(inputverdier.foreldre, grunnrett.normaldager);
+    const overføringsdager = effektiveOverføringsdager(
+      sumOverføringsdager(inputverdier.foreldre),
+      grunnrett.normaldager,
+    );
 
     expect(overføringsdager.normaldager).toEqual(0);
     expect(overføringsdager.koronadager).toEqual(5);
@@ -227,7 +240,10 @@ describe('omsorgsdager', () => {
     };
 
     const { grunnrett } = omsorgsdager(ingenBarnUtfylt.barn);
-    const overføringsdager = beregnOverføringsdager(ingenBarnUtfylt.foreldre, grunnrett.normaldager);
+    const overføringsdager = effektiveOverføringsdager(
+      sumOverføringsdager(ingenBarnUtfylt.foreldre),
+      grunnrett.normaldager,
+    );
 
     expect(overføringsdager.normaldager).toEqual(5);
     expect(overføringsdager.koronadager).toEqual(10);
