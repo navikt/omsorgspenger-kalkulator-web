@@ -5,13 +5,13 @@ type Map = {
 const tekstMap: Map = {
   'KalkulatorHeader.Overskrift': 'Omsorgsdagerkalkulator',
   'KalkulatorHeader.Nullstill': 'Nullstill',
-  'BarnInput.Overskrift': 'Barn som bor hos søker',
+  'BarnInput.Overskrift': 'Barn som bor hos bruker',
   'BarnInput.Hjelpetekst':
     'I denne delen fører du opp aktuell informasjon om barna som bor fast hos brukeren, dvs de barna brukeren har omsorgen for. Legg inn opplysninger per barn.',
   'BarnInput.Fjern': 'Fjern',
   'BarnInput.Alder': 'Hvor gammelt er barnet?',
   'BarnInput.KroniskSykt': 'Barnet er kronisk sykt',
-  'BarnInput.Aleneomsorg': 'Søker har aleneomsorg for barnet',
+  'BarnInput.Aleneomsorg': 'Bruker har aleneomsorg for barnet',
   'BarnInput.Aleneomsorg.Hjelpetekst1': 'Med aleneomsorg menes:',
   'BarnInput.Aleneomsorg.Hjelpetekst2': 'Bruker som bor alene med barn',
   'BarnInput.Aleneomsorg.Hjelpetekst3':
@@ -33,7 +33,7 @@ const tekstMap: Map = {
   'ForeldreInput.LeggTilForelder': 'Legg til flere foreldre',
   'ForeldreInput.Feil.Minustall': 'Kan ikke være minustall',
   'ForeldreInput.Feil.Desimaltall': 'Kan ikke være desimaltall',
-  'Resultat.HarRettPå': 'Søkeren har rett på',
+  'Resultat.HarRettPå': 'Brukeren har rett på',
   'Resultat.DagerOmsorgspenger': 'dager med omsorgspenger',
   'Resultat.Dager': 'Dager',
   'Resultat.KoronaTillegg': 'Korona-tillegg',
@@ -43,9 +43,9 @@ const tekstMap: Map = {
   'Resultat.AleneOmOmsorg': 'Alene om omsorgen',
   'Resultat.OverførtMottatt': 'Overført/Mottatt',
   'Resultat.AdvarselKorona':
-    'Søkeren har overført $overførteDager koronadager, men har kun $tilgjengeligeDager koronadager som kan overføres. Vennligst sjekk antallet',
+    'Brukeren har overført $overførteDager koronadager, men har kun $tilgjengeligeDager koronadager som kan overføres. Vennligst sjekk antallet',
   'Resultat.AdvarselNormal':
-    'Søkeren har overført/fordelt $overførteDager normaldager, men har kun $tilgjengeligeDager dager som kan fordeles/overføres. Vennligst sjekk antallet',
+    'Brukeren har overført/fordelt $overførteDager normaldager, men har kun $tilgjengeligeDager dager som kan fordeles/overføres. Vennligst sjekk antallet',
 };
 
 const tekster = (tekstnøkkel: string, values?: Map): string => {

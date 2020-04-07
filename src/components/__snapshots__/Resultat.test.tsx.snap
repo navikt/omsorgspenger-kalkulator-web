@@ -47,7 +47,7 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
       <div
         class="typo-normal alertstripe__tekst"
       >
-        Søkeren har overført/fordelt 11 normaldager, men har kun 0 dager som kan fordeles/overføres. Vennligst sjekk antallet
+        Brukeren har overført/fordelt 11 normaldager, men har kun 0 dager som kan fordeles/overføres. Vennligst sjekk antallet
       </div>
     </div>
     <div
@@ -92,7 +92,7 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
       <div
         class="typo-normal alertstripe__tekst"
       >
-        Søkeren har overført 11 koronadager, men har kun 10 koronadager som kan overføres. Vennligst sjekk antallet
+        Brukeren har overført 11 koronadager, men har kun 10 koronadager som kan overføres. Vennligst sjekk antallet
       </div>
     </div>
     <div
@@ -101,7 +101,7 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
       <p
         class="typo-element"
       >
-        Søkeren har rett på
+        Brukeren har rett på
       </p>
       <p
         class="typo-element dagerOmsorg"
@@ -206,7 +206,7 @@ exports[`Rendrer riktig resultat 1`] = `
       <p
         class="typo-element"
       >
-        Søkeren har rett på
+        Brukeren har rett på
       </p>
       <p
         class="typo-element dagerOmsorg"

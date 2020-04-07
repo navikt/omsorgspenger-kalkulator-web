@@ -7,6 +7,6 @@ test('Erstatter value key med oppgitt verdi', () => {
   });
 
   expect(tekst).toEqual(
-    'Søkeren har overført/fordelt 20 normaldager, men har kun 10 dager som kan fordeles/overføres. Vennligst sjekk antallet',
+    'Brukeren har overført/fordelt 20 normaldager, men har kun 10 dager som kan fordeles/overføres. Vennligst sjekk antallet',
   );
 });

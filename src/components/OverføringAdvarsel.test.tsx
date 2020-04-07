@@ -34,7 +34,7 @@ test('Overført flere normaldager enn tilgjengelig gir advarsel', () => {
   const { getByText } = render(
     <OverføringAdvarsel omsorgsprinsipper={grunnrettOgAleneomsorg} overføringsdager={overføringsdager} />,
   );
-  const advarsel = getByText(/Søkeren har overført\/fordelt/);
+  const advarsel = getByText(/Brukeren har overført\/fordelt/);
 
   expect(advarsel).toBeDefined();
 });
@@ -50,7 +50,7 @@ test('Overført flere koronadager enn tilgjengelig gir advarsel', () => {
     <OverføringAdvarsel omsorgsprinsipper={grunnrettOgAleneomsorg} overføringsdager={overføringsdager} />,
   );
 
-  const advarsel = getByText(/Søkeren har overført 21 koronadager/);
+  const advarsel = getByText(/Brukeren har overført 21 koronadager/);
 
   expect(advarsel).toBeDefined();
 });
