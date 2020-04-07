@@ -1,20 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
-import Omsorgsdager from '../types/Omsorgsdager';
 import Overføringsdager from '../types/Overføringsdager';
 import AlertStripe from 'nav-frontend-alertstriper';
 import tekster from '../tekster';
-
-const summerOmsorgsdager = (omsorgsprinsipper: Omsorgsprinsipper): Omsorgsdager =>
-  Object.values(omsorgsprinsipper)
-    .filter(dag => !!dag)
-    .reduce(
-      ({ normaldager, koronadager }, omsorgsdag) => ({
-        normaldager: normaldager + omsorgsdag.normaldager,
-        koronadager: koronadager + omsorgsdag.koronadager,
-      }),
-      { normaldager: 0, koronadager: 0 },
-    );
 
 interface OverføringAdvarselProps {
   omsorgsprinsipper: Omsorgsprinsipper;
@@ -22,11 +10,18 @@ interface OverføringAdvarselProps {
 }
 
 const OverføringAdvarsel: FunctionComponent<OverføringAdvarselProps> = ({ omsorgsprinsipper, overføringsdager }) => {
-  const sumOmsorgsdager = useMemo<Omsorgsdager>(() => summerOmsorgsdager(omsorgsprinsipper), [omsorgsprinsipper]);
+  const antallKoronadager = useMemo<number>(
+    () => Object.values(omsorgsprinsipper).reduce((sum, dag) => sum + dag.koronadager, 0),
+    [omsorgsprinsipper],
+  );
+  const { aleneomsorg, aleneomsorgKroniskSyke } = omsorgsprinsipper;
+  const aleneomsorgsdager = useMemo(() => aleneomsorgKroniskSyke.normaldager + aleneomsorg.normaldager, [
+    aleneomsorg,
+    aleneomsorgKroniskSyke,
+  ]);
 
-  const harOverførtFlerNormaldagerEnnTilgjengelig =
-    overføringsdager.fordelteNormaldager > sumOmsorgsdager.normaldager - omsorgsprinsipper.grunnrett.normaldager;
-  const harOverførtFlerKoronadagerEnnTilgjengelig = overføringsdager.overførteKoronadager > sumOmsorgsdager.koronadager;
+  const harOverførtFlerNormaldagerEnnTilgjengelig = overføringsdager.fordelteNormaldager > aleneomsorgsdager;
+  const harOverførtFlerKoronadagerEnnTilgjengelig = overføringsdager.overførteKoronadager > antallKoronadager;
 
   return (
     <>
@@ -34,7 +29,7 @@ const OverføringAdvarsel: FunctionComponent<OverføringAdvarselProps> = ({ omso
         <AlertStripe type="advarsel">
           {tekster('Resultat.AdvarselNormal', {
             overførteDager: `${overføringsdager.fordelteNormaldager}`,
-            tilgjengeligeDager: `${sumOmsorgsdager.normaldager - omsorgsprinsipper.grunnrett.normaldager}`,
+            tilgjengeligeDager: `${aleneomsorgsdager}`,
           })}
         </AlertStripe>
       )}
@@ -42,7 +37,7 @@ const OverføringAdvarsel: FunctionComponent<OverføringAdvarselProps> = ({ omso
         <AlertStripe type="advarsel">
           {tekster('Resultat.AdvarselKorona', {
             overførteDager: `${overføringsdager.overførteKoronadager}`,
-            tilgjengeligeDager: `${sumOmsorgsdager.koronadager}`,
+            tilgjengeligeDager: `${antallKoronadager}`,
           })}
         </AlertStripe>
       )}
