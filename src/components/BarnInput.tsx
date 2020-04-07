@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
-import { RadioPanelGruppe, Checkbox } from 'nav-frontend-skjema';
+import { Checkbox, RadioPanelGruppe } from 'nav-frontend-skjema';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { PopoverOrientering } from 'nav-frontend-popover';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
@@ -22,7 +24,10 @@ const BarnInput = () => {
 
   return (
     <div className="søkerensBarn">
-      <Undertittel>{tekster('BarnInput.Overskrift')}</Undertittel>
+      <div className="flex flex--marg">
+        <Undertittel>{tekster('BarnInput.Overskrift')}</Undertittel>
+        <Hjelpetekst type={PopoverOrientering.Hoyre}>{tekster('BarnInput.Hjelpetekst')}</Hjelpetekst>
+      </div>
       <FieldArray
         name="barn"
         render={arrayHelpers => (
@@ -59,26 +64,25 @@ const BarnInput = () => {
                     <Checkbox label={tekster('BarnInput.KroniskSykt')} checked={field.value} {...field} />
                   )}
                 </Field>
-                <Field name={`barn[${index}].søkerHarAleneomsorgFor`}>
-                  {({ field }: FieldProps) => (
-                    <Checkbox
-                      label={
-                        <>
-                          <div>
-                            <b>{tekster('BarnInput.Aleneomsorg')}</b>
-                          </div>
-                          <div>{tekster('BarnInput.Aleneomsorg.Hjelpetekst')}</div>
-                        </>
-                      }
-                      checked={field.value}
-                      {...field}
-                    />
-                  )}
-                </Field>
+                <div className="flex flex--marg">
+                  <Field name={`barn[${index}].søkerHarAleneomsorgFor`}>
+                    {({ field }: FieldProps) => (
+                      <Checkbox label={tekster('BarnInput.Aleneomsorg')} checked={field.value} {...field} />
+                    )}
+                  </Field>
+                  <Hjelpetekst type={PopoverOrientering.Hoyre}>
+                    <span>{tekster('BarnInput.Aleneomsorg.Hjelpetekst1')}</span>
+                    <ul>
+                      <li>{tekster('BarnInput.Aleneomsorg.Hjelpetekst2')}</li>
+                      <li>{tekster('BarnInput.Aleneomsorg.Hjelpetekst3')}</li>
+                      <li>{tekster('BarnInput.Aleneomsorg.Hjelpetekst4')}</li>
+                    </ul>
+                  </Hjelpetekst>
+                </div>
                 {index < values.barn.length - 1 && <div className="verticalLine" />}
               </div>
             ))}
-            <div className="flexJustifyCenter">
+            <div className="flex flex--justifyCenter">
               <Flatknapp
                 htmlType="button"
                 onClick={() => arrayHelpers.push(initBarnValue())}

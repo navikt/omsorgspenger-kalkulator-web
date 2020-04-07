@@ -69,9 +69,23 @@
   margin-bottom: 1em;
 }
 
-.flexJustifyCenter {
+.flex {
   display: flex;
-  justify-content: center;
+  &--justifyCenter {
+    justify-content: center;
+  }
+  &--marg {
+    & >:not(:last-child) {
+      margin-right: 1em;
+    }
+  }
+  &--col {
+    flex-direction: column;
+  }
+}
+
+.popover {
+  max-width: 500px;
 }
 
 .knapp svg.buttonIcon {

@@ -8,6 +8,8 @@ import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { initForelderValue } from './KalkulatorInput';
 import tekster from '../tekster';
 import { kunPositiveHeltall } from './validators';
+import Hjelpetekst from 'nav-frontend-hjelpetekst';
+import { PopoverOrientering } from 'nav-frontend-popover';
 
 const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => {
   const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
@@ -26,7 +28,14 @@ const ForeldreInput = () => {
 
   return (
     <div className="foreldreInput">
-      <Undertittel>{tekster('ForeldreInput.Overskrift')}</Undertittel>
+      <div className="flex flex--marg">
+        <Undertittel>{tekster('ForeldreInput.Overskrift')}</Undertittel>
+        <Hjelpetekst type={PopoverOrientering.Hoyre}>
+          <div>{tekster('ForeldreInput.Hjelpetekst1')}</div>
+          <div>{tekster('ForeldreInput.Hjelpetekst2')}</div>
+          <div>{tekster('ForeldreInput.Hjelpetekst3')}</div>
+        </Hjelpetekst>
+      </div>
       <FieldArray
         name="foreldre"
         render={arrayHelpers => (
@@ -68,7 +77,7 @@ const ForeldreInput = () => {
                 ))}
               </tbody>
             </table>
-            <div className="flexJustifyCenter">
+            <div className="flex flex--justifyCenter">
               <Flatknapp htmlType="button" onClick={() => arrayHelpers.push(initForelderValue())} mini form="kompakt">
                 <AddCircle className="buttonIcon" />
                 <span>{tekster('ForeldreInput.LeggTilForelder')}</span>

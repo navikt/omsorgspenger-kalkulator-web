@@ -6958,6 +6958,16 @@ nav-frontend-core@^4.0.12:
   resolved "https://registry.yarnpkg.com/nav-frontend-core/-/nav-frontend-core-4.0.12.tgz#e0577ddec4f81f1f411a0a0c3fad8e5fa215bbba"
   integrity sha512-xgkTQ2PzN8qYMkLZ+5qj5Dy6kpMHbfAW/y8suvsiLNAGq/KD/gTCzrGb6ypQ6i0CKMQO7cy9w8Kc8/MmhVpSNw==
 
+nav-frontend-hjelpetekst-style@^2.0.22:
+  version "2.0.22"
+  resolved "https://registry.yarnpkg.com/nav-frontend-hjelpetekst-style/-/nav-frontend-hjelpetekst-style-2.0.22.tgz#7d46d0f74596fcc87eeeb887596701126529ed4a"
+  integrity sha512-DzTxWIQ9fbGIMtq+HjhBtvWoIQBECZNQCgmpSSiPoflhV/ngtd6xQOK6eKf8ha1zOW7WtCJ9Vy/qiUgSYbnq4Q==
+
+nav-frontend-hjelpetekst@^2.0.26:
+  version "2.0.26"
+  resolved "https://registry.yarnpkg.com/nav-frontend-hjelpetekst/-/nav-frontend-hjelpetekst-2.0.26.tgz#b033f71fafad76674e91db5f04a819022a03c03f"
+  integrity sha512-12wieSkDu9uk5sNcMlrTBPM3iHsyaZixrXLy52pTmYICXTrecdfIZgZkzhUlUjK+xZW/h0pujTRqGLCkh1UoXQ==
+
 nav-frontend-ikoner-assets@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/nav-frontend-ikoner-assets/-/nav-frontend-ikoner-assets-2.0.1.tgz#82060b7f4f67255eeca55d6823b04a565ba53f3c"
@@ -6992,6 +7002,16 @@ nav-frontend-paneler-style@^0.3.18:
   version "0.3.18"
   resolved "https://registry.yarnpkg.com/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.18.tgz#a01b14b2759383a00c37057d936287954b45c249"
   integrity sha512-YDqgkS8QdSr9ScBiogm5h8yIBzcMFnWvQ4alF0OyXFw1gDSSVpE15uHsJZtR0+mz4ORWCx+0aT/ivdbT6eEcUg==
+
+nav-frontend-popover-style@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/nav-frontend-popover-style/-/nav-frontend-popover-style-0.0.3.tgz#6cc678547a5a1885bfef9678aaa71896c78eb028"
+  integrity sha512-+XgkXJ4tTpuNrvmu+aA5DrGMlkSZeBGlhN6AjhQLpsDA6SJJn2rWYnbtx963ou5xmV5DCZxBotsnQ7XCth9EYQ==
+
+nav-frontend-popover@^0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/nav-frontend-popover/-/nav-frontend-popover-0.0.23.tgz#4a7b6835a09059085a371354d5b173449fafea66"
+  integrity sha512-bLdi0wOedlinIVSe8E3HERSVYFadxlN9Xg2MXiwmKELwaVxb5EA58nOsQKalgBu8b7ERBFBl4QSg61g062So3A==
 
 nav-frontend-skjema-style@^2.0.4:
   version "2.0.4"
