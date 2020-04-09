@@ -10,34 +10,23 @@ interface OverføringAdvarselProps {
 }
 
 const OverføringAdvarsel: FunctionComponent<OverføringAdvarselProps> = ({ omsorgsprinsipper, overføringsdager }) => {
-  const antallKoronadager = useMemo<number>(
-    () => Object.values(omsorgsprinsipper).reduce((sum, dag) => sum + dag.koronadager, 0),
-    [omsorgsprinsipper],
-  );
-  const { aleneomsorg, aleneomsorgKroniskSyke } = omsorgsprinsipper;
-  const aleneomsorgsdager = useMemo(() => aleneomsorgKroniskSyke.normaldager + aleneomsorg.normaldager, [
-    aleneomsorg,
-    aleneomsorgKroniskSyke,
-  ]);
+  const totaltAntallDager = useMemo<number>(() => {
+    return Object.values(omsorgsprinsipper).reduce(
+      (sum, { normaldager, koronadager }) => sum + normaldager + koronadager,
+      0,
+    );
+  }, [omsorgsprinsipper]);
 
-  const harOverførtFlerNormaldagerEnnTilgjengelig = overføringsdager.fordelteNormaldager > aleneomsorgsdager;
-  const harOverførtFlerKoronadagerEnnTilgjengelig = overføringsdager.overførteKoronadager > antallKoronadager;
+  const overførteDager = overføringsdager.fordelteNormaldager + overføringsdager.overførteKoronadager;
+  const harOveførtFlereDagerEnnTilgjengelig = overførteDager > totaltAntallDager;
 
   return (
     <>
-      {harOverførtFlerNormaldagerEnnTilgjengelig && (
+      {harOveførtFlereDagerEnnTilgjengelig && (
         <AlertStripe type="advarsel">
           {tekster('Resultat.AdvarselNormal', {
-            overførteDager: `${overføringsdager.fordelteNormaldager}`,
-            tilgjengeligeDager: `${aleneomsorgsdager}`,
-          })}
-        </AlertStripe>
-      )}
-      {harOverførtFlerKoronadagerEnnTilgjengelig && (
-        <AlertStripe type="advarsel">
-          {tekster('Resultat.AdvarselKorona', {
-            overførteDager: `${overføringsdager.overførteKoronadager}`,
-            tilgjengeligeDager: `${antallKoronadager}`,
+            overførteDager: `${overførteDager}`,
+            tilgjengeligeDager: `${totaltAntallDager}`,
           })}
         </AlertStripe>
       )}
