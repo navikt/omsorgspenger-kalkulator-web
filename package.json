@@ -1,7 +1,7 @@
 {
-  "name": "omsorgspenger-kalkulator",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@navikt/omsorgspenger-kalkulator",
+  "version": "0.2.6",
+  "private": false,
   "dependencies": {
     "@craco/craco": "^5.6.4",
     "@navikt/fnrvalidator": "^1.1.0",
@@ -44,7 +44,10 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
+    "copyfiles": "^2.3.0",
     "husky": "^4.2.3",
+    "lint-staged": "^10.2.10",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.0.2"
   },
   "scripts": {
@@ -52,7 +55,11 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "start-express": "node ./server.js"
+    "start-express": "node ./server.js",
+    "build-lib": "npm-run-all clean-lib compile-lib-script copy-files-to-lib",
+    "clean-lib": "rimraf ./lib",
+    "compile-lib-script": "tsc -p tsconfig-build-lib.json",
+    "copy-files-to-lib": "copyfiles -u 2 \"src/images/**/*\" lib/images/ && copyfiles -u 2 \"src/components/*.less\" lib/components/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -79,5 +86,12 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "files": [
+    "package.json",
+    "/lib"
+  ],
+  "directories": {
+    "lib": "lib"
   }
 }

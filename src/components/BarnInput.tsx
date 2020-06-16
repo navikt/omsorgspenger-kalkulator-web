@@ -50,7 +50,6 @@ const BarnInput = () => {
                   {({ field }: FieldProps) => (
                     <>
                       <RadioPanelGruppe
-                        name="barnetsAlder"
                         legend={tekster('BarnInput.Alder')}
                         radios={radios(index)}
                         checked={field.value}
