@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import Resultat, { summerDager } from './Resultat';
 import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
@@ -79,4 +79,42 @@ test('Rendrer advarsel hvis man overfører fler dager enn man kan', () => {
   );
 
   expect(asFragment()).toMatchSnapshot();
+});
+
+describe('Visning av Resultat med/uten koronafelter', () => {
+  const rendered = (periode: PeriodeEnum): RenderResult => {
+    const contextValues: OmsorgsdagerForm = {
+      barn: [barnUnder12],
+      foreldre: [
+        {
+          id: '1',
+          normaldager: {
+            dagerFått: 0,
+            dagerTildelt: 11,
+          },
+          koronadager: {
+            dagerTildelt: 11,
+            dagerFått: 0,
+          },
+        },
+      ],
+      periode,
+    };
+
+    return render(
+      <SkjemaContext initialValues={contextValues}>
+        <Resultat />
+      </SkjemaContext>,
+    );
+  };
+
+  test('Periode innen korona viser koronafelter', () => {
+    const { findByText } = rendered(PeriodeEnum.Koronaperiode);
+    expect(findByText('Korona-tillegg')).toBeDefined();
+  });
+
+  test('Periode utenfor korona viser ikke koronafelter', () => {
+    const { queryByText } = rendered(PeriodeEnum.UtenomKoronaperiode);
+    expect(queryByText('Korona-tillegg')).toBeNull();
+  });
 });

@@ -1,8 +1,11 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, wait, RenderResult } from '@testing-library/react';
 import SkjemaContext from './SkjemaContext';
 import { initialValues } from './KalkulatorInput';
 import ForeldreInput from './ForeldreInput';
+import PeriodeEnum from '../types/PeriodeEnum';
+import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
+import { barnUnder12 } from './testdata';
 
 test('Legger til forelder', async () => {
   const { getAllByText, getByText } = render(
@@ -22,5 +25,43 @@ test('Legger til forelder', async () => {
   await wait(() => {
     const toRader = hentForelderrader();
     expect(toRader).toHaveLength(2);
+  });
+});
+
+describe('Visning av Forelder med/uten koronafelter', () => {
+  const rendered = (periode: PeriodeEnum): RenderResult => {
+    const contextValues: OmsorgsdagerForm = {
+      barn: [barnUnder12],
+      foreldre: [
+        {
+          id: '1',
+          normaldager: {
+            dagerFått: 0,
+            dagerTildelt: 11,
+          },
+          koronadager: {
+            dagerTildelt: 11,
+            dagerFått: 0,
+          },
+        },
+      ],
+      periode,
+    };
+
+    return render(
+      <SkjemaContext initialValues={contextValues}>
+        <ForeldreInput />
+      </SkjemaContext>,
+    );
+  };
+
+  test('Periode innen korona viser koronafelter', () => {
+    const { findByText } = rendered(PeriodeEnum.Koronaperiode);
+    expect(findByText('Midlertidig forskrift (korona)')).toBeDefined();
+  });
+
+  test('Periode utenfor korona viser ikke koronafelter', () => {
+    const { queryByText } = rendered(PeriodeEnum.UtenomKoronaperiode);
+    expect(queryByText('Midlertidig forskrift (korona)')).toBeNull();
   });
 });
