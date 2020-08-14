@@ -5,6 +5,10 @@ type Map = {
 const tekstMap: Map = {
   'KalkulatorHeader.Overskrift': 'Omsorgsdagerkalkulator',
   'KalkulatorHeader.Nullstill': 'Nullstill',
+  'PeriodeInput.Overskrift': 'Periode',
+  'Periode.RadioLabel': 'Er dette i koronaperioden: fra og med 13. mars 2020, til og med 30. juni 2020?',
+  'Periode.Ja': 'Ja',
+  'Periode.Nei': 'Nei',
   'BarnInput.Overskrift': 'Barn som bor hos bruker',
   'BarnInput.Hjelpetekst':
     'I denne delen fører du opp aktuell informasjon om barna som bor fast hos brukeren, dvs de barna brukeren har omsorgen for. Legg inn opplysninger per barn.',
