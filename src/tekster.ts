@@ -49,11 +49,16 @@ const tekstMap: Map = {
 };
 
 const tekster = (tekstnøkkel: string, values?: Map): string => {
+  const tekstverdi = tekstMap[tekstnøkkel];
+  if (!tekstverdi) {
+    console.warn('Fant ikke tekst for ', tekstnøkkel);
+    return tekstnøkkel;
+  }
   if (values) {
-    return Object.entries(values).reduce((str, [key, value]) => str.replace(`$${key}`, value), tekstMap[tekstnøkkel]);
+    return Object.entries(values).reduce((str, [key, value]) => str.replace(`$${key}`, value), tekstverdi);
   }
 
-  return tekstMap[tekstnøkkel];
+  return tekstverdi;
 };
 
 export default tekster;
