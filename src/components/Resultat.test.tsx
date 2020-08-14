@@ -6,6 +6,7 @@ import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import SkjemaContext from './SkjemaContext';
 import { barnUnder12, treBarnEttKroniskOgAleneomsorg } from './testdata';
 import Omsorgsdager from '../types/Omsorgsdager';
+import PeriodeEnum from '../types/PeriodeEnum';
 
 test('Summerer alle omsorgsprinsipper', () => {
   const omsorgsprinsipper: Omsorgsprinsipper = {
@@ -40,7 +41,9 @@ test('Rendrer riktig resultat', () => {
   const initValues: OmsorgsdagerForm = {
     barn: treBarnEttKroniskOgAleneomsorg,
     foreldre: [],
+    periode: PeriodeEnum.Koronaperiode,
   };
+
   const { asFragment } = render(
     <SkjemaContext initialValues={initValues}>
       <Resultat />
@@ -66,6 +69,7 @@ test('Rendrer advarsel hvis man overfører fler dager enn man kan', () => {
         },
       },
     ],
+    periode: PeriodeEnum.Koronaperiode,
   };
 
   const { asFragment } = render(
