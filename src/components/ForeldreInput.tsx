@@ -10,6 +10,8 @@ import tekster from '../tekster';
 import { kunPositiveHeltall } from './validators';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { PopoverOrientering } from 'nav-frontend-popover';
+import Tabell, { TabellStyle } from './tabell/Tabell';
+import PeriodeEnum from '../types/PeriodeEnum';
 
 const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => {
   const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
@@ -24,7 +26,7 @@ const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => 
 };
 
 const ForeldreInput = () => {
-  const foreldre = useFormikContext<OmsorgsdagerForm>().values.foreldre;
+  const { foreldre, periode } = useFormikContext<OmsorgsdagerForm>().values;
 
   return (
     <div className="foreldreInput">
@@ -40,43 +42,60 @@ const ForeldreInput = () => {
         name="foreldre"
         render={arrayHelpers => (
           <>
-            <table className="tabell tabell--reverse-stripet borderless foreldertabell">
-              <thead>
-                <tr>
-                  <th />
-                  <th className="noTextWrap">{tekster('ForeldreInput.NormalForskrift')}</th>
-                  <th />
-                  <th className="noTextWrap">{tekster('ForeldreInput.MidlertidigForskrift')}</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td />
-                  <td>{tekster('ForeldreInput.DagerMottatt')}</td>
-                  <td>{tekster('ForeldreInput.DagerFordelt')}</td>
-                  <td>{tekster('ForeldreInput.DagerMottatt')}</td>
-                  <td>{tekster('ForeldreInput.DagerOverført')}</td>
-                </tr>
-                {foreldre.map((forelder, index) => (
-                  <tr key={forelder.id}>
-                    <td valign="top">{`${tekster('ForeldreInput.Forelder')} #${index + 1}`}</td>
-                    <td valign="top">
-                      <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerFått`} />
-                    </td>
-                    <td valign="top">
-                      <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerTildelt`} />
-                    </td>
-                    <td valign="top" className="koronabakgrunn">
-                      <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerFått`} />
-                    </td>
-                    <td valign="top" className="koronabakgrunn">
-                      <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerTildelt`} />
-                    </td>
+            <Tabell
+              noBorder
+              className="foreldertabell"
+              tabellStyle={TabellStyle.stripet}
+              columnHeaderRows={
+                <>
+                  {periode === PeriodeEnum.Koronaperiode && (
+                    <>
+                      <tr>
+                        <th />
+                        <th className="noTextWrap">{tekster('ForeldreInput.NormalForskrift')}</th>
+                        <th />
+                        <th className="noTextWrap">{tekster('ForeldreInput.MidlertidigForskrift')}</th>
+                        <th />
+                      </tr>
+                    </>
+                  )}
+
+                  <tr>
+                    <td />
+                    <td>{tekster('ForeldreInput.DagerMottatt')}</td>
+                    <td>{tekster('ForeldreInput.DagerFordelt')}</td>
+                    {periode === PeriodeEnum.Koronaperiode && (
+                      <>
+                        <td>{tekster('ForeldreInput.DagerMottatt')}</td>
+                        <td>{tekster('ForeldreInput.DagerOverført')}</td>
+                      </>
+                    )}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </>
+              }
+            >
+              {foreldre.map((forelder, index) => (
+                <tr key={forelder.id}>
+                  <td valign="top">{`${tekster('ForeldreInput.Forelder')} #${index + 1}`}</td>
+                  <td valign="top">
+                    <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerFått`} />
+                  </td>
+                  <td valign="top">
+                    <AntallDagerInputFelt name={`foreldre[${index}].normaldager.dagerTildelt`} />
+                  </td>
+                  {periode === PeriodeEnum.Koronaperiode && (
+                    <>
+                      <td valign="top" className="koronabakgrunn">
+                        <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerFått`} />
+                      </td>
+                      <td valign="top" className="koronabakgrunn">
+                        <AntallDagerInputFelt name={`foreldre[${index}].koronadager.dagerTildelt`} />
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+            </Tabell>
             <div className="flex flex--justifyCenter">
               <Flatknapp htmlType="button" onClick={() => arrayHelpers.push(initForelderValue())} mini form="kompakt">
                 <AddCircle className="buttonIcon" />

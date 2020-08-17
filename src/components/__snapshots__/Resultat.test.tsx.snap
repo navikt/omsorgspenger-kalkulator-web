@@ -5,6 +5,88 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
   <div
     class="resultatContainer"
   >
+    <table
+      class="tabell tabell--stripet"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Dager
+          </th>
+          <th>
+            Korona-tillegg
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Grunnrett
+          </td>
+          <td>
+            10
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            10
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Barn med kronisk sykdom
+          </td>
+          <td>
+            -
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Aleneomsorg for barn med kronisk sykdom
+          </td>
+          <td>
+            -
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Alene om omsorgen
+          </td>
+          <td>
+            -
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Overført/Mottatt
+          </td>
+          <td>
+            -11
+          </td>
+          <td
+            class="koronabakgrunn"
+          >
+            -11
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div
       class="alertstripe alertstripe--advarsel"
     >
@@ -64,6 +146,15 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
         -2 dager med omsorgspenger
       </p>
     </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Rendrer riktig resultat 1`] = `
+<DocumentFragment>
+  <div
+    class="resultatContainer"
+  >
     <table
       class="tabell tabell--stripet"
     >
@@ -84,12 +175,12 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
             Grunnrett
           </td>
           <td>
-            10
+            15
           </td>
           <td
             class="koronabakgrunn"
           >
-            10
+            15
           </td>
         </tr>
         <tr>
@@ -110,12 +201,12 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
             Aleneomsorg for barn med kronisk sykdom
           </td>
           <td>
-            -
+            20
           </td>
           <td
             class="koronabakgrunn"
           >
-            -
+            20
           </td>
         </tr>
         <tr>
@@ -123,12 +214,12 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
             Alene om omsorgen
           </td>
           <td>
-            -
+            10
           </td>
           <td
             class="koronabakgrunn"
           >
-            -
+            10
           </td>
         </tr>
         <tr>
@@ -136,25 +227,16 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
             Overført/Mottatt
           </td>
           <td>
-            -11
+            -
           </td>
           <td
             class="koronabakgrunn"
           >
-            -11
+            -
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Rendrer riktig resultat 1`] = `
-<DocumentFragment>
-  <div
-    class="resultatContainer"
-  >
     <div
       class="resultatHeader"
     >
@@ -169,88 +251,6 @@ exports[`Rendrer riktig resultat 1`] = `
         90 dager med omsorgspenger
       </p>
     </div>
-    <table
-      class="tabell tabell--stripet"
-    >
-      <thead>
-        <tr>
-          <th />
-          <th>
-            Dager
-          </th>
-          <th>
-            Korona-tillegg
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            Grunnrett
-          </td>
-          <td>
-            15
-          </td>
-          <td
-            class="koronabakgrunn"
-          >
-            15
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Barn med kronisk sykdom
-          </td>
-          <td>
-            -
-          </td>
-          <td
-            class="koronabakgrunn"
-          >
-            -
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Aleneomsorg for barn med kronisk sykdom
-          </td>
-          <td>
-            20
-          </td>
-          <td
-            class="koronabakgrunn"
-          >
-            20
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Alene om omsorgen
-          </td>
-          <td>
-            10
-          </td>
-          <td
-            class="koronabakgrunn"
-          >
-            10
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Overført/Mottatt
-          </td>
-          <td>
-            -
-          </td>
-          <td
-            class="koronabakgrunn"
-          >
-            -
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </DocumentFragment>
 `;

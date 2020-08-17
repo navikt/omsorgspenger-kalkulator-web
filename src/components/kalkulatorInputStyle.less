@@ -50,6 +50,11 @@
   border-bottom-right-radius: 10px;
 }
 
+.periodeinput {
+  padding: 1em;
+  margin: 1em 0;
+}
+
 .marginTop {
   margin-top: 1em;
 }
@@ -132,57 +137,10 @@
   margin-bottom: 1em;
 }
 
-.tabell {
-  margin-bottom: 1em;
-  &.borderless {
-    tbody td {
-      border: none;
-    }
-    tbody tr:first-child {
-      border: none;
-    }
-  }
-
-  &--reverse-stripet {
-    tbody {
-      tr:nth-child(even) {
-        td {
-          background: rgba(0, 0, 0, 0.03);
-          &.koronabakgrunn {
-            background-color: #FFE5C2;
-          }
-        }
-      }
-      tr:nth-child(odd) {
-        td.koronabakgrunn {
-            background-color: #FFF2E0;
-        }
-      }
-    }
-  }
-
-  &--stripet {
-    tbody {
-      tr:nth-child(odd) {
-        td {
-          &.koronabakgrunn {
-            background-color: #FFE5C2 !important;
-          }
-        }
-      }
-      tr:nth-child(even) {
-        td.koronabakgrunn {
-          background-color: #FFF2E0;
-        }
-      }
-    }
-  }
-
-  &.foreldertabell {
-    table-layout: fixed;
-    td, th {
-      width: 20%;
-    }
+.foreldertabell {
+  table-layout: fixed;
+  td, th {
+    width: 20%;
   }
 }
 
