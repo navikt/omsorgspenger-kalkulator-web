@@ -1,7 +1,6 @@
 import React, { BaseSyntheticEvent, FunctionComponent } from 'react';
 import { Undertittel } from 'nav-frontend-typografi';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
@@ -11,7 +10,8 @@ import { kunPositiveHeltall } from './validators';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { PopoverOrientering } from 'nav-frontend-popover';
 import Tabell, { TabellStyle } from './tabell/Tabell';
-import PeriodeEnum from '../types/PeriodeEnum';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
+import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
 
 const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => {
   const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();

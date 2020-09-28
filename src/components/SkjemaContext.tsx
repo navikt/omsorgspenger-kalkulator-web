@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 
 interface SkjemaProps {
   initialValues: OmsorgsdagerForm;

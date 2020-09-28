@@ -3,18 +3,18 @@ import { useFormikContext } from 'formik';
 import { Element } from 'nav-frontend-typografi';
 import 'nav-frontend-tabell-style';
 import {
+  beregnOmsorgsdager,
   effektiveOverføringsdager,
-  omsorgsdager as beregnOmsorgsdager,
   sumOverføringsdager,
-} from './kalkulerOmsorgsdager';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
-import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
+} from '@navikt/kalkuler-omsorgsdager/lib/kalkulerOmsorgsdager';
 import tekster from '../tekster';
-import Omsorgsdager from '../types/Omsorgsdager';
-import Overføringsdager from '../types/Overføringsdager';
 import OverføringAdvarsel from './OverføringAdvarsel';
-import PeriodeEnum from '../types/PeriodeEnum';
 import Tabell, { TabellStyle } from './tabell/Tabell';
+import Omsorgsdager from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsdager';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
+import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Overføringsdager from '@navikt/kalkuler-omsorgsdager/lib/types/Overføringsdager';
 
 export const summerDager = (...omsorgsdager: Omsorgsdager[]): number =>
   omsorgsdager

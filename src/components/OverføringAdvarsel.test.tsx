@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import OverføringAdvarsel from './OverføringAdvarsel';
-import Overføringsdager from '../types/Overføringsdager';
-import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Overføringsdager from '@navikt/kalkuler-omsorgsdager/lib/types/Overføringsdager';
 
 const grunnrettOgAleneomsorg: Omsorgsprinsipper = {
   grunnrett: {
