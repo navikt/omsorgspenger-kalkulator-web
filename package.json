@@ -84,6 +84,11 @@
       "prettier --write"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "files": [
     "package.json",
     "/lib"
