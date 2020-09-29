@@ -5,10 +5,10 @@ import { Form } from 'formik';
 import Resultat from './Resultat';
 import KalkulatorHeader from './KalkulatorHeader';
 import ForeldreInput from './ForeldreInput';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { uuidv4 } from '../utils';
 import SkjemaContext from './SkjemaContext';
 import PeriodeInput from './PeriodeInput';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 
 export const initBarnValue = () => ({
   id: uuidv4(),

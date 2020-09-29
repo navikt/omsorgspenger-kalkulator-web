@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 import Resultat, { summerDager } from './Resultat';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
-import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
 import SkjemaContext from './SkjemaContext';
 import { barnUnder12, treBarnEttKroniskOgAleneomsorg } from './testdata';
-import Omsorgsdager from '../types/Omsorgsdager';
-import PeriodeEnum from '../types/PeriodeEnum';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Omsorgsdager from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsdager';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
+import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
 
 test('Summerer alle omsorgsprinsipper', () => {
   const omsorgsprinsipper: Omsorgsprinsipper = {

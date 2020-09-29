@@ -3,8 +3,8 @@ import { ReactComponent as KalkulatorIkon } from '../images/calculator.svg';
 import { Systemtittel } from 'nav-frontend-typografi';
 import { Flatknapp } from 'nav-frontend-knapper';
 import { useFormikContext } from 'formik';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import tekster from '../tekster';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 
 const KalkulatorHeader = () => {
   const { resetForm } = useFormikContext<OmsorgsdagerForm>();

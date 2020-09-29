@@ -2,8 +2,8 @@ import React from 'react';
 import { render, fireEvent, wait } from '@testing-library/react';
 import SkjemaContext from './SkjemaContext';
 import BarnInput from './BarnInput';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { treBarnEttKroniskOgAleneomsorg } from './testdata';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 
 test('Fjerner og legger til barn', async () => {
   const skjemaverdier: OmsorgsdagerForm = {

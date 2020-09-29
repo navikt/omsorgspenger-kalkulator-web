@@ -3,9 +3,9 @@ import { render, fireEvent, wait, RenderResult } from '@testing-library/react';
 import SkjemaContext from './SkjemaContext';
 import { initialValues } from './KalkulatorInput';
 import ForeldreInput from './ForeldreInput';
-import PeriodeEnum from '../types/PeriodeEnum';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { barnUnder12 } from './testdata';
+import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 
 test('Legger til forelder', async () => {
   const { getAllByText, getByText } = render(

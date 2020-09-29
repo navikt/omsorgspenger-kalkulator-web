@@ -2,7 +2,7 @@ import React from 'react';
 import tekster from '../tekster';
 import { Field, FieldProps } from 'formik';
 import { RadioPanelGruppe } from 'nav-frontend-skjema';
-import PeriodeEnum from '../types/PeriodeEnum';
+import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
 
 const PeriodeInput: React.FunctionComponent = () => {
   return (

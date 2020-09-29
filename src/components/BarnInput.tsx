@@ -5,19 +5,19 @@ import { Checkbox, RadioPanelGruppe } from 'nav-frontend-skjema';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { PopoverOrientering } from 'nav-frontend-popover';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
-import OmsorgsdagerForm from '../types/OmsorgsdagerForm';
 import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { ReactComponent as TrashCan } from '../images/trash-can.svg';
 import tekster from '../tekster';
 import { initBarnValue } from './KalkulatorInput';
-import { AlderEnum } from '../types/Barn';
+import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
+import { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
 
 const BarnInput = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
   const radios = useCallback(
     (index: number) => [
-      { label: 'Under 12', value: AlderEnum.UNDER12, id: `barn[${index}].under12` },
-      { label: 'Over 12', value: AlderEnum.OVER12, id: `barn[${index}].over12` },
+      { label: 'Under 12', value: AlderType.UNDER12, id: `barn[${index}].under12` },
+      { label: 'Over 12', value: AlderType.OVER12, id: `barn[${index}].over12` },
     ],
     [],
   );

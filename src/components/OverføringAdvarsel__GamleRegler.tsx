@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useMemo } from 'react';
-import Omsorgsprinsipper from '../types/Omsorgsprinsipper';
-import Overføringsdager from '../types/Overføringsdager';
 import AlertStripe from 'nav-frontend-alertstriper';
 import tekster from '../tekster';
+import Omsorgsprinsipper from '@navikt/kalkuler-omsorgsdager/lib/types/Omsorgsprinsipper';
+import Overføringsdager from '@navikt/kalkuler-omsorgsdager/lib/types/Overføringsdager';
 
 interface OverføringAdvarselProps {
   omsorgsprinsipper: Omsorgsprinsipper;
