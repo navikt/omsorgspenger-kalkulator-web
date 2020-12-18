@@ -6,7 +6,8 @@ const tekstMap: Map = {
   'KalkulatorHeader.Overskrift': 'Omsorgsdagerkalkulator',
   'KalkulatorHeader.Nullstill': 'Nullstill',
   'PeriodeInput.Overskrift': 'Periode',
-  'Periode.RadioLabel': 'Gjelder beregningen i koronaperioden: fra og med 13. mars 2020, til og med 30. juni 2020?',
+  'Periode.RadioLabel':
+    'Gjelder beregningen i en av koronaperiodene, altså fra og med 13. mars 2020 til og med 30. juni 2020, eller fra og med 1. januar 2021 til og med 31. desember 2021?',
   'Periode.Ja': 'Ja',
   'Periode.Nei': 'Nei',
   'BarnInput.Overskrift': 'Barn som bor hos bruker',
