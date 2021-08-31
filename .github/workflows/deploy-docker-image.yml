@@ -36,15 +36,15 @@ jobs:
         run: yarn build
       - name: Sette Docker-navn og -tag
         run: |
-          echo "TAG=$(date +"%Y%m%d%H%M%S")-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
-          echo "IMAGE=$IMAGE_BASE:$(date +"%Y%m%d%H%M%S")-$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+          echo "TAG=$(date +"%Y%m%d%H%M%S")-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Bygg og laste opp docker-image
         run: |
+          echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV	  
           docker pull nginx:1.17.8-alpine
-          docker build --tag ${IMAGE} --tag ${IMAGE_BASE}:latest .
+          docker build --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest .
           echo "$GITHUB_TOKEN" | docker login --username "x-access-token" --password-stdin https://docker.pkg.github.com
           docker push ${IMAGE_BASE}:latest
-          docker push ${IMAGE}
+          docker push ${IMAGE_BASE}:${TAG}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy til testmiljø
