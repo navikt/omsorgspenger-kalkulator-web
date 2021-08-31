@@ -2,13 +2,12 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: omsorgsdagerkalkulator
-  namespace: default
+  namespace: omsorgspenger
   labels:
-    team: k9saksbehandling
+    team: omsorgspenger
 spec:
   image: {{ image }}
   port: 8080
-  team: k9saksbehandling
   liveness:
     path: /isAlive
     initialDelay: 20
@@ -31,4 +30,5 @@ spec:
       cpu: 200m
       memory: 32Mi
   ingresses:
-    - "https://omsorgsdagerkalkulator.nais.adeo.no/"
+    - https://omsorgsdagerkalkulator.nais.adeo.no
+    - https://omsorgsdagerkalkulator.intern.nav.no
