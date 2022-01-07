@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import SkjemaContext from './SkjemaContext';
 import BarnInput from './BarnInput';
 import { treBarnEttKroniskOgAleneomsorg } from './testdata';
@@ -24,7 +24,7 @@ test('Fjerner og legger til barn', async () => {
   const fjernknapp = getAllByText('Fjern')[0];
   fireEvent.click(fjernknapp);
 
-  await wait(() => {
+  await waitFor(() => {
     const toBarn = hentBarn();
     expect(toBarn).toHaveLength(2);
   });
@@ -32,7 +32,7 @@ test('Fjerner og legger til barn', async () => {
   const leggTilKnapp = getByText('Legg til flere barn');
   fireEvent.click(leggTilKnapp);
 
-  await wait(() => {
+  await waitFor(() => {
     const barn = hentBarn();
     expect(barn).toHaveLength(3);
   });

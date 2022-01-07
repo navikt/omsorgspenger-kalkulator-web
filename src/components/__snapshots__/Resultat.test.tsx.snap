@@ -99,9 +99,11 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
           advarsel
         </span>
         <svg
+          aria-label="advarsel-ikon"
           focusable="false"
           height="1.5em"
           kind="advarsel-sirkel-fyll"
+          role="img"
           viewBox="0 0 24 24"
           width="1.5em"
         >
@@ -116,11 +118,11 @@ exports[`Rendrer advarsel hvis man overfører fler dager enn man kan 1`] = `
             />
             <path
               d="M12.027 19H12A1.499 1.499 0 0 1 11.973 16L12 16a1.501 1.501 0 0 1 .027 3z"
-              fill="#3E3832"
+              fill="#262626"
             />
             <path
               d="M12 5a1 1 0 0 1 1 1v7a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1z"
-              fill="#3E3832"
+              fill="#262626"
               fill-rule="nonzero"
             />
           </g>
