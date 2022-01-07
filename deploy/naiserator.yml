@@ -25,10 +25,11 @@ spec:
   resources:
     limits:
       cpu: 500m
-      memory: 64Mi
+      memory: 128Mi
     requests:
       cpu: 200m
       memory: 32Mi
   ingresses:
-    - https://omsorgspenger-kalkulator.nais.preprod.local
-    - https://omsorgsdagerkalkulator.dev.intern.nav.no
+  {{#each ingresses as |url|}}
+     - {{url}}
+  {{/each}}

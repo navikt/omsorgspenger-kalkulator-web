@@ -8,56 +8,59 @@ on:
     branches:
       - master
 env:
-  IMAGE_BASE: docker.pkg.github.com/${{ github.repository }}/omsorgspenger-kalkulator-web
+  IMAGE_BASE: ghcr.io/${{ github.repository }}
 jobs:
   deploy-docker-image:
     name: Deploy Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Hente kode
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2
       - name: Sette opp Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 16.x
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          cache: yarn
       - name: Installere dependencies
         run: yarn install --ignore-optional --no-progress --frozen-lockfile
       - name: Tester og linting
         run: yarn test --watchAll=false
       - name: Bygge dist
         run: yarn build
+
       - name: Sette Docker-navn og -tag
         run: |
           echo "TAG=$(date +"%Y%m%d%H%M%S")-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Bygg og laste opp docker-image
         run: |
           echo "IMAGE=$IMAGE_BASE:$TAG" >> $GITHUB_ENV	  
           docker pull nginx:1.17.8-alpine
           docker build --tag ${IMAGE_BASE}:${TAG} --tag ${IMAGE_BASE}:latest .
-          echo "$GITHUB_TOKEN" | docker login --username "x-access-token" --password-stdin https://docker.pkg.github.com
-          docker push ${IMAGE_BASE}:latest
-          docker push ${IMAGE_BASE}:${TAG}
+          docker push ${IMAGE_BASE} --all-tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy til testmiljø
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.DEPLOY_KEY }}
           CLUSTER: dev-fss
-          RESOURCE: deploy/dev-fss.yml
+          RESOURCE: deploy/naiserator.yml
+          VARS: deploy/dev-fss.json
+
       - name: Deploy til prod
         uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.DEPLOY_KEY }}
           CLUSTER: prod-fss
-          RESOURCE: deploy/prod-fss.yml
+          RESOURCE: deploy/naiserator.yml
+          VARS: deploy/prod-fss.json
 
 
