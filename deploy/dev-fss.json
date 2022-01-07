@@ -1,0 +1,6 @@
+{
+  "ingresses": [
+    "https://omsorgspenger-kalkulator.nais.preprod.local",
+    "https://omsorgsdagerkalkulator.dev.intern.nav.no"
+  ]
+}
