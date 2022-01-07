@@ -109,8 +109,8 @@ describe('Visning av Resultat med/uten koronafelter', () => {
   };
 
   test('Periode innen korona viser koronafelter', () => {
-    const { findByText } = rendered(PeriodeEnum.Koronaperiode);
-    expect(findByText('Korona-tillegg')).toBeDefined();
+    const { getByText } = rendered(PeriodeEnum.Koronaperiode);
+    expect(getByText('Korona-tillegg')).toBeDefined();
   });
 
   test('Periode utenfor korona viser ikke koronafelter', () => {
