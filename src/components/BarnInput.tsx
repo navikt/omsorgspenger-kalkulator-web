@@ -5,12 +5,12 @@ import { Checkbox, RadioPanelGruppe } from 'nav-frontend-skjema';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 import { PopoverOrientering } from 'nav-frontend-popover';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
-import { ReactComponent as AddCircle } from '../images/add-circle.svg';
-import { ReactComponent as TrashCan } from '../images/trash-can.svg';
 import tekster from '../tekster';
 import { initBarnValue } from './KalkulatorInput';
 import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 import { AlderType } from '@navikt/kalkuler-omsorgsdager/lib/types/Barn';
+import { AddCircle } from '../images/add-circle';
+import { TrashCan } from '../images/trashCan';
 
 const BarnInput = () => {
   const { values } = useFormikContext<OmsorgsdagerForm>();
@@ -42,7 +42,7 @@ const BarnInput = () => {
                     form="kompakt"
                     className="høyreHjørne"
                   >
-                    <TrashCan className="buttonIcon" />
+                    <TrashCan height={24} width={24}/>
                     <span>{tekster('BarnInput.Fjern')}</span>
                   </Flatknapp>
                 )}
@@ -89,7 +89,7 @@ const BarnInput = () => {
                 form="kompakt"
                 className="marginTop"
               >
-                <AddCircle className="buttonIcon" />
+                <AddCircle height={24} width={24} />
                 <span>{tekster('BarnInput.LeggTilBarn')}</span>
               </Flatknapp>
             </div>
