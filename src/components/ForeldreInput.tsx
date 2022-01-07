@@ -3,7 +3,6 @@ import { Undertittel } from 'nav-frontend-typografi';
 import { Field, FieldArray, FieldProps, useFormikContext } from 'formik';
 import { Input } from 'nav-frontend-skjema';
 import { Flatknapp } from 'nav-frontend-knapper';
-import { ReactComponent as AddCircle } from '../images/add-circle.svg';
 import { initForelderValue } from './KalkulatorInput';
 import tekster from '../tekster';
 import { kunPositiveHeltall } from './validators';
@@ -12,6 +11,7 @@ import { PopoverOrientering } from 'nav-frontend-popover';
 import Tabell, { TabellStyle } from './tabell/Tabell';
 import OmsorgsdagerForm from '@navikt/kalkuler-omsorgsdager/lib/types/OmsorgsdagerForm';
 import PeriodeEnum from '@navikt/kalkuler-omsorgsdager/lib/types/PeriodeEnum';
+import { AddCircle } from '../images/add-circle';
 
 const AntallDagerInputFelt: FunctionComponent<{ name: string }> = ({ name }) => {
   const markerTekstVedFokus = (event: BaseSyntheticEvent) => event.target.select();
@@ -98,7 +98,7 @@ const ForeldreInput = () => {
             </Tabell>
             <div className="flex flex--justifyCenter">
               <Flatknapp htmlType="button" onClick={() => arrayHelpers.push(initForelderValue())} mini form="kompakt">
-                <AddCircle className="buttonIcon" />
+                <AddCircle height={24} width={24} />
                 <span>{tekster('ForeldreInput.LeggTilForelder')}</span>
               </Flatknapp>
             </div>
